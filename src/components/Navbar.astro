@@ -1,0 +1,208 @@
+---
+// Navbar Component
+---
+
+<nav class="navbar" id="navbar">
+    <div class="nav-container">
+        <a href="/" class="logo">
+            <span class="logo-text">Xirlane</span>
+            <span class="logo-subtext">Cleaning</span>
+        </a>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <ul class="nav-menu" id="navMenu">
+            <li><a href="/" class="nav-link">Home</a></li>
+            <li><a href="/services" class="nav-link">Services</a></li>
+            <li><a href="/about" class="nav-link">About</a></li>
+            <li><a href="/why-us" class="nav-link">Why Us</a></li>
+            <li><a href="/testimonials" class="nav-link">Testimonials</a></li>
+            <li><a href="/contact" class="nav-link">Contact</a></li>
+            <li><a href="/contact" class="nav-link btn-nav">Book Now</a></li>
+        </ul>
+    </div>
+</nav>
+
+<style>
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    padding: 20px 0;
+    transition: var(--transition-normal);
+}
+
+.navbar.scrolled {
+    background-color: var(--color-white);
+    box-shadow: var(--shadow-md);
+    padding: 15px 0;
+}
+
+.nav-container {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+}
+
+.logo-text {
+    font-family: var(--font-heading);
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--color-white);
+    letter-spacing: 1px;
+    transition: var(--transition-normal);
+}
+
+.logo-subtext {
+    font-family: var(--font-body);
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    transition: var(--transition-normal);
+}
+
+.navbar.scrolled .logo-text {
+    color: var(--color-primary);
+}
+
+.nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.nav-link {
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    color: var(--color-white);
+    position: relative;
+    transition: var(--transition-normal);
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: var(--color-accent);
+    transition: var(--transition-normal);
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+.navbar.scrolled .nav-link {
+    color: var(--color-gray-700);
+}
+
+.navbar.scrolled .nav-link:hover {
+    color: var(--color-primary);
+}
+
+.btn-nav {
+    padding: 12px 24px;
+    background-color: var(--color-accent);
+    color: var(--color-primary-dark) !important;
+    font-weight: 600;
+}
+
+.btn-nav::after {
+    display: none;
+}
+
+.btn-nav:hover {
+    background-color: var(--color-accent-light);
+}
+
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.nav-toggle span {
+    width: 25px;
+    height: 2px;
+    background-color: var(--color-white);
+    transition: var(--transition-normal);
+}
+
+.navbar.scrolled .nav-toggle span {
+    background-color: var(--color-gray-800);
+}
+
+@media (max-width: 768px) {
+    .nav-toggle {
+        display: flex;
+    }
+    
+    .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        max-width: 400px;
+        height: 100vh;
+        background-color: var(--color-white);
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 100px 40px 40px;
+        gap: 0;
+        transition: var(--transition-normal);
+        box-shadow: var(--shadow-xl);
+    }
+    
+    .nav-menu.active {
+        right: 0;
+    }
+    
+    .nav-menu .nav-link {
+        color: var(--color-gray-800);
+        padding: 15px 0;
+        font-size: 1.125rem;
+        width: 100%;
+        border-bottom: 1px solid var(--color-gray-100);
+    }
+    
+    .nav-menu .btn-nav {
+        margin-top: 20px;
+        width: 100%;
+        text-align: center;
+    }
+    
+    .nav-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+    
+    .nav-toggle.active span:nth-child(2) {
+        opacity: 0;
+    }
+    
+    .nav-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px);
+    }
+}
+</style>

@@ -1,0 +1,117 @@
+---
+// Why Us Section Component
+const reasons = [
+  {
+    number: '01',
+    title: 'White-Glove Service',
+    description: 'Every detail matters. From the moment we arrive to our final walkthrough, we deliver an unmatched level of care and professionalism.'
+  },
+  {
+    number: '02',
+    title: 'Trained Professionals',
+    description: 'Our team undergoes rigorous training in advanced cleaning techniques, customer service, and home care best practices.'
+  },
+  {
+    number: '03',
+    title: 'Customized Plans',
+    description: 'No two homes are alike. We create personalized cleaning plans that address your specific needs and preferences.'
+  },
+  {
+    number: '04',
+    title: 'Satisfaction Guaranteed',
+    description: "Not completely satisfied? We'll return within 24 hours to make it right—no questions asked. Your happiness is our priority."
+  },
+  {
+    number: '05',
+    title: 'Consistent Excellence',
+    description: 'Request the same cleaning team for every visit. Build a relationship with professionals who know your home.'
+  },
+  {
+    number: '06',
+    title: 'Flexible Scheduling',
+    description: 'Early morning, evening, or weekend appointments available. We work around your schedule, not the other way around.'
+  }
+];
+---
+
+<section class="why-us" id="why-us">
+    <div class="container">
+        <div class="section-header light">
+            <p class="section-tagline">The Xirlane Difference</p>
+            <h2 class="section-title">Why Philadelphia Chooses Us</h2>
+        </div>
+        <div class="why-us-grid">
+            {reasons.map((reason) => (
+                <div class="why-card">
+                    <div class="why-number">{reason.number}</div>
+                    <h3 class="why-title">{reason.title}</h3>
+                    <p class="why-description">{reason.description}</p>
+                </div>
+            ))}
+        </div>
+    </div>
+</section>
+
+<style>
+.why-us {
+    padding: var(--section-padding) 0;
+    background-color: var(--color-primary);
+}
+
+.why-us-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+}
+
+.why-card {
+    padding: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: var(--transition-normal);
+}
+
+.why-card:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-color: var(--color-accent);
+}
+
+.why-number {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    opacity: 0.5;
+    margin-bottom: 16px;
+}
+
+.why-title {
+    font-size: 1.25rem;
+    color: var(--color-white);
+    margin-bottom: 12px;
+}
+
+.why-description {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9375rem;
+    line-height: 1.7;
+}
+
+@media (max-width: 1024px) {
+    .why-us-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .why-us-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .why-card {
+        padding: 30px;
+    }
+}
+</style>

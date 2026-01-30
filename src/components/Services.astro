@@ -1,0 +1,234 @@
+---
+// Services Section Component
+const services = [
+  {
+    icon: 'home',
+    title: 'Standard Cleaning',
+    description: 'Comprehensive cleaning covering all living areas, bedrooms, bathrooms, and kitchen. Perfect for regular maintenance of your home.',
+    features: ['Dusting all surfaces', 'Vacuuming & mopping', 'Bathroom sanitization', 'Kitchen cleaning'],
+    featured: false
+  },
+  {
+    icon: 'star',
+    title: 'Deep Cleaning',
+    description: 'An intensive, thorough cleaning that reaches every corner. Ideal for first-time clients or seasonal refreshes.',
+    features: ['Inside appliances', 'Baseboards & vents', 'Window sills & tracks', 'Cabinet interiors'],
+    featured: true
+  },
+  {
+    icon: 'calendar',
+    title: 'Recurring Service',
+    description: 'Weekly, bi-weekly, or monthly cleaning plans tailored to your lifestyle. Enjoy consistent cleanliness with preferred scheduling.',
+    features: ['Flexible scheduling', 'Same trusted cleaners', 'Priority booking', 'Special member rates'],
+    featured: false
+  },
+  {
+    icon: 'heart',
+    title: 'Move In/Out Cleaning',
+    description: 'Start fresh in your new home or leave your old one spotless. Complete top-to-bottom cleaning for transitions.',
+    features: ['Empty home cleaning', 'All appliances included', 'Closet & storage areas', 'Garage optional'],
+    featured: false
+  },
+  {
+    icon: 'smile',
+    title: 'Post-Event Cleaning',
+    description: 'After hosting, let us handle the cleanup. From intimate gatherings to large celebrations, we restore your home.',
+    features: ['Same or next day service', 'Trash & recycling', 'Floor restoration', 'Surface sanitization'],
+    featured: false
+  },
+  {
+    icon: 'shield',
+    title: 'Sanitization Service',
+    description: 'Hospital-grade disinfection for complete peace of mind. EPA-approved products safe for families and pets.',
+    features: ['High-touch surfaces', 'Air purification', 'Antimicrobial treatment', 'Safe for all ages'],
+    featured: false
+  }
+];
+---
+
+<section class="services" id="services">
+    <div class="container">
+        <div class="section-header">
+            <p class="section-tagline">What We Offer</p>
+            <h2 class="section-title">Our Premium Services</h2>
+            <p class="section-description">Every service is delivered with the utmost care and attention to detail, ensuring your home receives the luxury treatment it deserves.</p>
+        </div>
+        <div class="services-grid">
+            {services.map((service) => (
+                <div class={`service-card ${service.featured ? 'featured' : ''}`}>
+                    {service.featured && <div class="featured-badge">Most Popular</div>}
+                    <div class="service-icon">
+                        {service.icon === 'home' && (
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                            </svg>
+                        )}
+                        {service.icon === 'star' && (
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                            </svg>
+                        )}
+                        {service.icon === 'calendar' && (
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                <line x1="16" y1="2" x2="16" y2="6"></line>
+                                <line x1="8" y1="2" x2="8" y2="6"></line>
+                                <line x1="3" y1="10" x2="21" y2="10"></line>
+                            </svg>
+                        )}
+                        {service.icon === 'heart' && (
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                            </svg>
+                        )}
+                        {service.icon === 'smile' && (
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+                                <line x1="9" y1="9" x2="9.01" y2="9"></line>
+                                <line x1="15" y1="9" x2="15.01" y2="9"></line>
+                            </svg>
+                        )}
+                        {service.icon === 'shield' && (
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                            </svg>
+                        )}
+                    </div>
+                    <h3 class="service-title">{service.title}</h3>
+                    <p class="service-description">{service.description}</p>
+                    <ul class="service-features">
+                        {service.features.map((feature) => (
+                            <li>{feature}</li>
+                        ))}
+                    </ul>
+                    <a href="#book" class="service-link">Book This Service →</a>
+                </div>
+            ))}
+        </div>
+    </div>
+</section>
+
+<style>
+.services {
+    padding: var(--section-padding) 0;
+    background-color: var(--color-off-white);
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.service-card {
+    background-color: var(--color-white);
+    padding: 40px 35px;
+    position: relative;
+    transition: var(--transition-normal);
+    border: 1px solid var(--color-gray-200);
+}
+
+.service-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+}
+
+.service-card.featured {
+    border: 2px solid var(--color-accent);
+}
+
+.featured-badge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: var(--color-accent);
+    color: var(--color-primary-dark);
+    padding: 6px 12px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.service-icon {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+}
+
+.service-icon svg {
+    width: 40px;
+    height: 40px;
+    color: var(--color-primary);
+}
+
+.service-title {
+    font-size: 1.375rem;
+    margin-bottom: 12px;
+}
+
+.service-description {
+    color: var(--color-text-light);
+    font-size: 0.9375rem;
+    margin-bottom: 20px;
+}
+
+.service-features {
+    margin-bottom: 24px;
+}
+
+.service-features li {
+    font-size: 0.875rem;
+    color: var(--color-text-light);
+    padding: 8px 0;
+    border-bottom: 1px solid var(--color-gray-100);
+    position: relative;
+    padding-left: 20px;
+}
+
+.service-features li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 6px;
+    background-color: var(--color-accent);
+    border-radius: 50%;
+}
+
+.service-link {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    letter-spacing: 0.5px;
+}
+
+.service-link:hover {
+    color: var(--color-accent-dark);
+}
+
+@media (max-width: 1024px) {
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .service-card {
+        padding: 30px 25px;
+    }
+}
+</style>

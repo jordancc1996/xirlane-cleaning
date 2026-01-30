@@ -1,0 +1,214 @@
+---
+// Footer Component
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="/" class="footer-logo">
+                    <span class="logo-text">Xirlane</span>
+                    <span class="logo-subtext">Cleaning</span>
+                </a>
+                <p class="footer-tagline">Elevating home care to an art form. Premium residential cleaning services in Philadelphia.</p>
+                <div class="footer-social">
+                    <a href="#" class="social-link" aria-label="Facebook">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                    </a>
+                    <a href="#" class="social-link" aria-label="Instagram">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                    </a>
+                    <a href="#" class="social-link" aria-label="LinkedIn">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/services">Services</a></li>
+                    <li><a href="/about">About Us</a></li>
+                    <li><a href="/testimonials">Testimonials</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="/services">Standard Cleaning</a></li>
+                    <li><a href="/services">Deep Cleaning</a></li>
+                    <li><a href="/services">Recurring Service</a></li>
+                    <li><a href="/services">Move In/Out</a></li>
+                    <li><a href="/services">Sanitization</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Service Areas</h4>
+                <ul>
+                    <li>Center City</li>
+                    <li>Rittenhouse Square</li>
+                    <li>Chestnut Hill</li>
+                    <li>Main Line</li>
+                    <li>Greater Philadelphia</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; {currentYear} Xirlane Cleaning. All rights reserved.</p>
+            <div class="footer-bottom-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<style>
+.footer {
+    background-color: var(--color-gray-900);
+    color: var(--color-white);
+    padding: 80px 0 0;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 60px;
+    padding-bottom: 60px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-logo {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+    margin-bottom: 20px;
+}
+
+.footer-logo .logo-text {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-white);
+    letter-spacing: 1px;
+}
+
+.footer-logo .logo-subtext {
+    font-family: var(--font-body);
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--color-accent);
+}
+
+.footer-tagline {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    margin-bottom: 24px;
+}
+
+.footer-social {
+    display: flex;
+    gap: 16px;
+}
+
+.social-link {
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-fast);
+}
+
+.social-link:hover {
+    background-color: var(--color-accent);
+    border-color: var(--color-accent);
+}
+
+.social-link svg {
+    width: 18px;
+    height: 18px;
+    color: var(--color-white);
+}
+
+.social-link:hover svg {
+    color: var(--color-primary-dark);
+}
+
+.footer-links h4 {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--color-white);
+    margin-bottom: 24px;
+}
+
+.footer-links ul li {
+    margin-bottom: 12px;
+}
+
+.footer-links ul li a,
+.footer-links ul li {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.9375rem;
+    transition: var(--transition-fast);
+}
+
+.footer-links ul li a:hover {
+    color: var(--color-accent);
+}
+
+.footer-bottom {
+    padding: 30px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-bottom p {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.875rem;
+}
+
+.footer-bottom-links {
+    display: flex;
+    gap: 30px;
+}
+
+.footer-bottom-links a {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.875rem;
+}
+
+.footer-bottom-links a:hover {
+    color: var(--color-accent);
+}
+
+@media (max-width: 1024px) {
+    .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .footer-bottom {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+}
+</style>

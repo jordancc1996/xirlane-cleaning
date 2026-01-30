@@ -1,0 +1,279 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { 
+  title, 
+  description = "Xirlane Cleaning - Premium residential cleaning services in Philadelphia. Experience the luxury of a spotless home with our professional cleaning team." 
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content={description}>
+    <meta name="keywords" content="luxury cleaning, residential cleaning, house cleaning, Philadelphia cleaning service, premium cleaning, professional cleaners">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>{title}</title>
+</head>
+<body>
+    <slot />
+    <script is:inline src="/scripts/main.js"></script>
+</body>
+</html>
+
+<style is:global>
+/* ===================================
+   Xirlane Cleaning - Premium Styles
+   =================================== */
+
+/* CSS Variables */
+:root {
+    /* Colors */
+    --color-primary: #1a3a2f;
+    --color-primary-light: #2d5a4a;
+    --color-primary-dark: #0f2620;
+    --color-accent: #c9a962;
+    --color-accent-light: #d4b97a;
+    --color-accent-dark: #b8944d;
+    --color-white: #ffffff;
+    --color-off-white: #faf9f7;
+    --color-cream: #f5f3ef;
+    --color-gray-100: #f7f7f7;
+    --color-gray-200: #e8e8e8;
+    --color-gray-300: #d1d1d1;
+    --color-gray-400: #a1a1a1;
+    --color-gray-500: #717171;
+    --color-gray-600: #525252;
+    --color-gray-700: #3d3d3d;
+    --color-gray-800: #262626;
+    --color-gray-900: #171717;
+    --color-text: #2d2d2d;
+    --color-text-light: #5a5a5a;
+    
+    /* Typography */
+    --font-heading: 'Cormorant Garamond', Georgia, serif;
+    --font-body: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+    
+    /* Spacing */
+    --section-padding: 120px;
+    --container-width: 1200px;
+    --container-padding: 24px;
+    
+    /* Transitions */
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.5s ease;
+    
+    /* Shadows */
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+    --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.12);
+    --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+/* Reset & Base */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    font-family: var(--font-body);
+    font-weight: 400;
+    line-height: 1.7;
+    color: var(--color-text);
+    background-color: var(--color-white);
+    overflow-x: hidden;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: var(--transition-fast);
+}
+
+ul {
+    list-style: none;
+}
+
+/* Container */
+.container {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--color-gray-900);
+}
+
+h1 { font-size: clamp(2.5rem, 5vw, 4rem); }
+h2 { font-size: clamp(2rem, 4vw, 3rem); }
+h3 { font-size: clamp(1.25rem, 2vw, 1.5rem); }
+
+/* Buttons */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 32px;
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    border: 2px solid transparent;
+    border-radius: 0;
+    cursor: pointer;
+    transition: var(--transition-normal);
+}
+
+.btn-primary {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border-color: var(--color-primary);
+}
+
+.btn-primary:hover {
+    background-color: var(--color-accent);
+    border-color: var(--color-accent);
+    color: var(--color-primary-dark);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--color-white);
+    border-color: var(--color-white);
+}
+
+.btn-secondary:hover {
+    background-color: var(--color-white);
+    color: var(--color-primary);
+}
+
+.btn-light {
+    background-color: var(--color-white);
+    color: var(--color-primary);
+    border-color: var(--color-white);
+}
+
+.btn-light:hover {
+    background-color: var(--color-accent);
+    border-color: var(--color-accent);
+    color: var(--color-primary-dark);
+}
+
+.btn-outline-light {
+    background-color: transparent;
+    color: var(--color-white);
+    border-color: var(--color-white);
+}
+
+.btn-outline-light:hover {
+    background-color: var(--color-white);
+    color: var(--color-primary);
+}
+
+.btn-full {
+    width: 100%;
+}
+
+/* Section Styles */
+.section-header {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 60px;
+}
+
+.section-header.light .section-title,
+.section-header.light .section-description {
+    color: var(--color-white);
+}
+
+.section-header.light .section-tagline {
+    color: var(--color-accent);
+}
+
+.section-tagline {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--color-accent-dark);
+    margin-bottom: 12px;
+}
+
+.section-title {
+    margin-bottom: 20px;
+}
+
+.section-description {
+    color: var(--color-text-light);
+    font-size: 1.0625rem;
+}
+
+/* Animation Classes */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Form Success State */
+.form-success {
+    text-align: center;
+    padding: 40px;
+}
+
+.form-success h3 {
+    color: var(--color-primary);
+    margin-bottom: 10px;
+}
+
+.form-success p {
+    color: var(--color-text-light);
+}
+
+/* Responsive Base */
+@media (max-width: 1024px) {
+    :root {
+        --section-padding: 80px;
+    }
+}
+
+@media (max-width: 480px) {
+    :root {
+        --section-padding: 60px;
+    }
+}
+</style>

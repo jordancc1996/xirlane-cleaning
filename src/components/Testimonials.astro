@@ -1,0 +1,144 @@
+---
+// Testimonials Section Component
+const testimonials = [
+  {
+    text: "Xirlane Cleaning has transformed our home life. Coming back to a perfectly clean house every week is pure luxury. Their attention to detail is remarkable—they even organize our pantry!",
+    author: 'Sarah Mitchell',
+    location: 'Rittenhouse Square',
+    initials: 'SM'
+  },
+  {
+    text: "As a busy professional, I needed a reliable cleaning service I could trust completely. Xirlane exceeded every expectation. Professional, thorough, and always on time. Worth every penny.",
+    author: 'James Chen',
+    location: 'Center City',
+    initials: 'JC'
+  },
+  {
+    text: "We've tried many cleaning services over the years, but none compare to Xirlane. They treat our home with such respect and care. My kids have allergies, and their eco-friendly products make all the difference.",
+    author: 'Emily Rodriguez',
+    location: 'Chestnut Hill',
+    initials: 'ER'
+  }
+];
+---
+
+<section class="testimonials" id="testimonials">
+    <div class="container">
+        <div class="section-header">
+            <p class="section-tagline">Client Stories</p>
+            <h2 class="section-title">What Our Clients Say</h2>
+        </div>
+        <div class="testimonials-slider">
+            {testimonials.map((testimonial) => (
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">
+                        {[...Array(5)].map(() => (
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                            </svg>
+                        ))}
+                    </div>
+                    <p class="testimonial-text">"{testimonial.text}"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">{testimonial.initials}</div>
+                        <div class="author-info">
+                            <h4>{testimonial.author}</h4>
+                            <p>{testimonial.location}</p>
+                        </div>
+                    </div>
+                </div>
+            ))}
+        </div>
+    </div>
+</section>
+
+<style>
+.testimonials {
+    padding: var(--section-padding) 0;
+    background-color: var(--color-cream);
+}
+
+.testimonials-slider {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.testimonial-card {
+    background-color: var(--color-white);
+    padding: 40px;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition-normal);
+}
+
+.testimonial-card:hover {
+    box-shadow: var(--shadow-lg);
+}
+
+.testimonial-rating {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 20px;
+}
+
+.testimonial-rating svg {
+    width: 18px;
+    height: 18px;
+    color: var(--color-accent);
+}
+
+.testimonial-text {
+    font-size: 1.0625rem;
+    font-style: italic;
+    color: var(--color-text);
+    line-height: 1.8;
+    margin-bottom: 24px;
+}
+
+.testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.author-avatar {
+    width: 50px;
+    height: 50px;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 0.875rem;
+}
+
+.author-info h4 {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.author-info p {
+    font-size: 0.875rem;
+    color: var(--color-text-light);
+}
+
+@media (max-width: 1024px) {
+    .testimonials-slider {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .testimonials-slider {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .testimonial-card {
+        padding: 30px;
+    }
+}
+</style>

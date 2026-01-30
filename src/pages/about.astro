@@ -1,0 +1,571 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import CTA from '../components/CTA.astro';
+import Footer from '../components/Footer.astro';
+
+const values = [
+  {
+    title: 'Excellence',
+    description: 'We hold ourselves to the highest standards. Every clean is performed as if it were our own home.'
+  },
+  {
+    title: 'Integrity',
+    description: 'Honesty and transparency guide everything we do. We earn your trust through consistent, reliable service.'
+  },
+  {
+    title: 'Respect',
+    description: 'We treat your home with the utmost care and respect, handling your belongings as treasured possessions.'
+  },
+  {
+    title: 'Sustainability',
+    description: 'We use eco-friendly products that are safe for your family, pets, and our planet.'
+  }
+];
+
+const team = [
+  {
+    name: 'Maria Santos',
+    role: 'Founder & CEO',
+    bio: 'With over 15 years in the hospitality industry, Maria founded Xirlane Cleaning to bring luxury hotel standards to residential cleaning.',
+    initials: 'MS'
+  },
+  {
+    name: 'David Chen',
+    role: 'Operations Director',
+    bio: 'David ensures every cleaning meets our exacting standards, overseeing quality control and team training.',
+    initials: 'DC'
+  },
+  {
+    name: 'Sarah Williams',
+    role: 'Client Relations Manager',
+    bio: 'Sarah is dedicated to understanding each client\'s unique needs and ensuring their complete satisfaction.',
+    initials: 'SW'
+  }
+];
+---
+
+<Layout title="About Us | Xirlane Cleaning - Our Story & Mission">
+    <Navbar />
+    
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <p class="hero-tagline">Our Story</p>
+            <h1>About Xirlane Cleaning</h1>
+            <p class="hero-description">Elevating home care to an art form since 2016. Discover the passion and dedication behind Philadelphia's premier cleaning service.</p>
+        </div>
+    </section>
+
+    <!-- Story Section -->
+    <section class="story-section">
+        <div class="container">
+            <div class="story-grid">
+                <div class="story-images">
+                    <div class="story-image-main">
+                        <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&h=700&fit=crop" alt="Professional cleaning team">
+                    </div>
+                    <div class="story-image-accent">
+                        <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=400&h=300&fit=crop" alt="Cleaning professional at work">
+                    </div>
+                    <div class="story-badge">
+                        <span class="badge-number">10+</span>
+                        <span class="badge-text">Years Serving Philadelphia</span>
+                    </div>
+                </div>
+                <div class="story-content">
+                    <h2>Our Journey</h2>
+                    <p class="lead">Xirlane Cleaning was born from a simple observation: Philadelphia homeowners deserved better. Better service, better products, better results.</p>
+                    <p>Founded in 2016 by Maria Santos, our company started with a single mission—to bring the meticulous standards of luxury hospitality into private homes. Having spent years managing housekeeping for five-star hotels, Maria knew that true cleanliness is about more than just appearances. It's about creating spaces that promote health, tranquility, and well-being.</p>
+                    <p>What began as a small team of three has grown into a family of over 30 dedicated professionals, each sharing our commitment to excellence. Today, we serve hundreds of Philadelphia families, from cozy apartments in Center City to sprawling estates on the Main Line.</p>
+                    <p>But growth hasn't changed who we are. We still treat every home like it's our first client's, and every client like they're our most important. Because they are.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section class="mission-section">
+        <div class="container">
+            <div class="mission-grid">
+                <div class="mission-content">
+                    <p class="section-tagline">Our Mission</p>
+                    <h2>Creating Sanctuaries, One Home at a Time</h2>
+                    <p>We believe your home should be your sanctuary—a place of peace, comfort, and rejuvenation. Our mission is to give you back the time and energy you'd spend cleaning, so you can focus on what truly matters: your family, your passions, your life.</p>
+                    <p>Every service we provide is designed with this purpose in mind. From our carefully vetted team members to our eco-friendly products, every detail reflects our commitment to your well-being.</p>
+                </div>
+                <div class="mission-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">500+</span>
+                        <span class="stat-label">Happy Families</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">15,000+</span>
+                        <span class="stat-label">Cleanings Completed</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">98%</span>
+                        <span class="stat-label">Client Retention</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">4.9★</span>
+                        <span class="stat-label">Average Rating</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="values-section">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-tagline">What We Stand For</p>
+                <h2 class="section-title">Our Core Values</h2>
+            </div>
+            <div class="values-grid">
+                {values.map((value, index) => (
+                    <div class="value-card">
+                        <span class="value-number">0{index + 1}</span>
+                        <h3>{value.title}</h3>
+                        <p>{value.description}</p>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team-section">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-tagline">The People Behind The Clean</p>
+                <h2 class="section-title">Meet Our Leadership</h2>
+            </div>
+            <div class="team-grid">
+                {team.map((member) => (
+                    <div class="team-card">
+                        <div class="team-avatar">{member.initials}</div>
+                        <h3>{member.name}</h3>
+                        <p class="team-role">{member.role}</p>
+                        <p class="team-bio">{member.bio}</p>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section class="certifications-section">
+        <div class="container">
+            <div class="section-header light">
+                <p class="section-tagline">Trust & Credentials</p>
+                <h2 class="section-title">Fully Licensed & Insured</h2>
+            </div>
+            <div class="cert-grid">
+                <div class="cert-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                    </svg>
+                    <h3>Fully Insured</h3>
+                    <p>$2 million liability coverage protects your home and belongings</p>
+                </div>
+                <div class="cert-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                        <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                    </svg>
+                    <h3>Background Checked</h3>
+                    <p>Every team member passes comprehensive screening</p>
+                </div>
+                <div class="cert-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="12" cy="8" r="7"></circle>
+                        <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
+                    </svg>
+                    <h3>Bonded</h3>
+                    <p>Additional protection for your complete peace of mind</p>
+                </div>
+                <div class="cert-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                    </svg>
+                    <h3>Trained Professionals</h3>
+                    <p>40+ hours of training before first solo assignment</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <CTA />
+    <Footer />
+</Layout>
+
+<style>
+.page-hero {
+    position: relative;
+    padding: 180px 0 100px;
+    background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920&h=600&fit=crop');
+    background-size: cover;
+    background-position: center;
+    text-align: center;
+}
+
+.page-hero .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(26, 58, 47, 0.95) 0%, rgba(15, 38, 32, 0.9) 100%);
+}
+
+.page-hero .hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.page-hero .hero-tagline {
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 16px;
+}
+
+.page-hero h1 {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    color: var(--color-white);
+    margin-bottom: 20px;
+}
+
+.page-hero .hero-description {
+    font-size: 1.125rem;
+    color: rgba(255, 255, 255, 0.85);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.story-section {
+    padding: 100px 0;
+    background: var(--color-white);
+}
+
+.story-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+}
+
+.story-images {
+    position: relative;
+}
+
+.story-image-main {
+    width: 80%;
+}
+
+.story-image-main img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+}
+
+.story-image-accent {
+    position: absolute;
+    bottom: -30px;
+    right: 0;
+    width: 55%;
+    box-shadow: var(--shadow-xl);
+}
+
+.story-image-accent img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.story-badge {
+    position: absolute;
+    top: 30px;
+    right: 50px;
+    background: var(--color-primary);
+    color: var(--color-white);
+    padding: 25px;
+    text-align: center;
+}
+
+.badge-number {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-accent);
+}
+
+.badge-text {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.story-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 24px;
+}
+
+.story-content .lead {
+    font-size: 1.25rem;
+    color: var(--color-text);
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.story-content p {
+    color: var(--color-text-light);
+    margin-bottom: 16px;
+    line-height: 1.8;
+}
+
+.mission-section {
+    padding: 100px 0;
+    background: var(--color-off-white);
+}
+
+.mission-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.mission-content .section-tagline {
+    text-align: left;
+}
+
+.mission-content h2 {
+    font-size: 2.25rem;
+    margin-bottom: 24px;
+}
+
+.mission-content p {
+    color: var(--color-text-light);
+    margin-bottom: 16px;
+    line-height: 1.8;
+}
+
+.mission-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.stat-item {
+    background: var(--color-white);
+    padding: 30px;
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+}
+
+.stat-number {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--color-primary);
+}
+
+.stat-label {
+    font-size: 0.875rem;
+    color: var(--color-text-light);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.values-section {
+    padding: 100px 0;
+    background: var(--color-white);
+}
+
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+}
+
+.value-card {
+    padding: 40px 30px;
+    background: var(--color-cream);
+    text-align: center;
+    transition: var(--transition-normal);
+}
+
+.value-card:hover {
+    background: var(--color-primary);
+}
+
+.value-card:hover h3,
+.value-card:hover p,
+.value-card:hover .value-number {
+    color: var(--color-white);
+}
+
+.value-card:hover .value-number {
+    color: var(--color-accent);
+}
+
+.value-number {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    opacity: 0.5;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.value-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 12px;
+    transition: var(--transition-normal);
+}
+
+.value-card p {
+    font-size: 0.9375rem;
+    color: var(--color-text-light);
+    line-height: 1.7;
+    transition: var(--transition-normal);
+}
+
+.team-section {
+    padding: 100px 0;
+    background: var(--color-off-white);
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.team-card {
+    background: var(--color-white);
+    padding: 40px;
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+}
+
+.team-avatar {
+    width: 100px;
+    height: 100px;
+    background: var(--color-primary);
+    color: var(--color-white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0 auto 20px;
+}
+
+.team-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 5px;
+}
+
+.team-role {
+    color: var(--color-accent-dark);
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+}
+
+.team-bio {
+    color: var(--color-text-light);
+    font-size: 0.9375rem;
+    line-height: 1.7;
+}
+
+.certifications-section {
+    padding: 100px 0;
+    background: var(--color-primary);
+}
+
+.certifications-section .section-header.light .section-title {
+    color: var(--color-white);
+}
+
+.cert-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+}
+
+.cert-item {
+    text-align: center;
+    padding: 30px;
+}
+
+.cert-item svg {
+    width: 50px;
+    height: 50px;
+    color: var(--color-accent);
+    margin-bottom: 20px;
+}
+
+.cert-item h3 {
+    color: var(--color-white);
+    font-size: 1.125rem;
+    margin-bottom: 10px;
+}
+
+.cert-item p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9375rem;
+}
+
+@media (max-width: 1024px) {
+    .story-grid,
+    .mission-grid {
+        grid-template-columns: 1fr;
+        gap: 50px;
+    }
+    
+    .story-images {
+        order: -1;
+    }
+    
+    .values-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .cert-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .values-grid,
+    .team-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .cert-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .mission-stats {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+</style>

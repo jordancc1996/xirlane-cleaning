@@ -1,0 +1,572 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import CTA from '../components/CTA.astro';
+import Footer from '../components/Footer.astro';
+
+const testimonials = [
+  {
+    text: "Xirlane Cleaning has transformed our home life. Coming back to a perfectly clean house every week is pure luxury. Their attention to detail is remarkable—they even organize our pantry!",
+    author: 'Sarah Mitchell',
+    location: 'Rittenhouse Square',
+    initials: 'SM',
+    rating: 5,
+    service: 'Recurring Service'
+  },
+  {
+    text: "As a busy professional, I needed a reliable cleaning service I could trust completely. Xirlane exceeded every expectation. Professional, thorough, and always on time. Worth every penny.",
+    author: 'James Chen',
+    location: 'Center City',
+    initials: 'JC',
+    rating: 5,
+    service: 'Deep Cleaning'
+  },
+  {
+    text: "We've tried many cleaning services over the years, but none compare to Xirlane. They treat our home with such respect and care. My kids have allergies, and their eco-friendly products make all the difference.",
+    author: 'Emily Rodriguez',
+    location: 'Chestnut Hill',
+    initials: 'ER',
+    rating: 5,
+    service: 'Recurring Service'
+  },
+  {
+    text: "The move-out cleaning they did for our old house was incredible. Our landlord said it was the cleanest a property had ever been returned. Got our full deposit back!",
+    author: 'Michael Thompson',
+    location: 'University City',
+    initials: 'MT',
+    rating: 5,
+    service: 'Move Out Cleaning'
+  },
+  {
+    text: "I was hesitant to let strangers into my home, but Xirlane made me feel completely comfortable from day one. The same team comes every time, and they feel like part of the family now.",
+    author: 'Patricia Williams',
+    location: 'Manayunk',
+    initials: 'PW',
+    rating: 5,
+    service: 'Recurring Service'
+  },
+  {
+    text: "After our daughter's birthday party, our house looked like a disaster zone. Xirlane came the next morning and had everything spotless by noon. Absolute lifesavers!",
+    author: 'Robert & Lisa Park',
+    location: 'Main Line',
+    initials: 'RP',
+    rating: 5,
+    service: 'Post-Event Cleaning'
+  },
+  {
+    text: "The deep cleaning we had before selling our house was phenomenal. Multiple buyers commented on how clean and fresh everything was. Definitely helped us sell faster.",
+    author: 'Amanda Foster',
+    location: 'Northern Liberties',
+    initials: 'AF',
+    rating: 5,
+    service: 'Deep Cleaning'
+  },
+  {
+    text: "What I appreciate most is the consistency. Every single time, my home looks exactly how I want it. They remember my preferences and always go the extra mile.",
+    author: 'David Goldstein',
+    location: 'Society Hill',
+    initials: 'DG',
+    rating: 5,
+    service: 'Recurring Service'
+  },
+  {
+    text: "The sanitization service during flu season gave us such peace of mind with a newborn in the house. Knowing every surface was properly disinfected was worth every dollar.",
+    author: 'Jennifer Martinez',
+    location: 'Fairmount',
+    initials: 'JM',
+    rating: 5,
+    service: 'Sanitization Service'
+  }
+];
+
+const stats = [
+  { number: '500+', label: 'Happy Clients' },
+  { number: '4.9', label: 'Average Rating' },
+  { number: '98%', label: 'Would Recommend' },
+  { number: '15,000+', label: 'Cleanings Done' }
+];
+---
+
+<Layout title="Testimonials | Xirlane Cleaning - What Our Clients Say">
+    <Navbar />
+    
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <p class="hero-tagline">Client Stories</p>
+            <h1>What Our Clients Say</h1>
+            <p class="hero-description">Don't just take our word for it. Hear from the Philadelphia families who trust Xirlane Cleaning with their homes.</p>
+        </div>
+    </section>
+
+    <!-- Stats Bar -->
+    <section class="stats-bar">
+        <div class="container">
+            <div class="stats-grid">
+                {stats.map((stat) => (
+                    <div class="stat-item">
+                        <span class="stat-number">{stat.number}</span>
+                        <span class="stat-label">{stat.label}</span>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Testimonial -->
+    <section class="featured-testimonial">
+        <div class="container">
+            <div class="featured-content">
+                <div class="featured-quote">
+                    <svg class="quote-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                    </svg>
+                    <blockquote>
+                        <p>After trying three other cleaning services, we finally found Xirlane. The difference is night and day. It's not just clean—it's a completely different level of care and attention. Our home feels like a sanctuary now, and we never want to go back to doing it ourselves.</p>
+                    </blockquote>
+                    <div class="featured-author">
+                        <div class="author-avatar">JT</div>
+                        <div class="author-info">
+                            <strong>Jennifer & Michael Thompson</strong>
+                            <span>Chestnut Hill • 3+ Year Clients</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="featured-image">
+                    <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=500&h=600&fit=crop" alt="Beautiful clean living room">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Grid -->
+    <section class="testimonials-section">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-tagline">More Reviews</p>
+                <h2 class="section-title">Trusted by Hundreds of Philadelphia Families</h2>
+            </div>
+            <div class="testimonials-grid">
+                {testimonials.map((testimonial) => (
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <div class="testimonial-rating">
+                                {[...Array(testimonial.rating)].map(() => (
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                                    </svg>
+                                ))}
+                            </div>
+                            <span class="service-tag">{testimonial.service}</span>
+                        </div>
+                        <p class="testimonial-text">"{testimonial.text}"</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">{testimonial.initials}</div>
+                            <div class="author-info">
+                                <strong>{testimonial.author}</strong>
+                                <span>{testimonial.location}</span>
+                            </div>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </section>
+
+    <!-- Review Platforms -->
+    <section class="platforms-section">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-tagline">Find Us Online</p>
+                <h2 class="section-title">Read More Reviews</h2>
+            </div>
+            <div class="platforms-grid">
+                <div class="platform-card">
+                    <div class="platform-logo">G</div>
+                    <h3>Google Reviews</h3>
+                    <div class="platform-rating">
+                        <span class="rating-number">4.9</span>
+                        <div class="stars">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                        </div>
+                    </div>
+                    <p>150+ Reviews</p>
+                </div>
+                <div class="platform-card">
+                    <div class="platform-logo">Y</div>
+                    <h3>Yelp</h3>
+                    <div class="platform-rating">
+                        <span class="rating-number">4.8</span>
+                        <div class="stars">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                        </div>
+                    </div>
+                    <p>85+ Reviews</p>
+                </div>
+                <div class="platform-card">
+                    <div class="platform-logo">F</div>
+                    <h3>Facebook</h3>
+                    <div class="platform-rating">
+                        <span class="rating-number">5.0</span>
+                        <div class="stars">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                        </div>
+                    </div>
+                    <p>60+ Recommendations</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <CTA />
+    <Footer />
+</Layout>
+
+<style>
+.page-hero {
+    position: relative;
+    padding: 180px 0 100px;
+    background-image: url('https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=1920&h=600&fit=crop');
+    background-size: cover;
+    background-position: center;
+    text-align: center;
+}
+
+.page-hero .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(26, 58, 47, 0.95) 0%, rgba(15, 38, 32, 0.9) 100%);
+}
+
+.page-hero .hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.page-hero .hero-tagline {
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 16px;
+}
+
+.page-hero h1 {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    color: var(--color-white);
+    margin-bottom: 20px;
+}
+
+.page-hero .hero-description {
+    font-size: 1.125rem;
+    color: rgba(255, 255, 255, 0.85);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.stats-bar {
+    background: var(--color-accent);
+    padding: 40px 0;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    text-align: center;
+}
+
+.stat-item .stat-number {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--color-primary-dark);
+}
+
+.stat-item .stat-label {
+    font-size: 0.875rem;
+    color: var(--color-primary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.featured-testimonial {
+    padding: 100px 0;
+    background: var(--color-white);
+}
+
+.featured-content {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.featured-quote {
+    padding: 50px;
+    background: var(--color-cream);
+    position: relative;
+}
+
+.quote-icon {
+    width: 50px;
+    height: 50px;
+    color: var(--color-accent);
+    opacity: 0.5;
+    margin-bottom: 20px;
+}
+
+.featured-quote blockquote p {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-style: italic;
+    line-height: 1.6;
+    color: var(--color-text);
+    margin-bottom: 30px;
+}
+
+.featured-author {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.featured-author .author-avatar {
+    width: 60px;
+    height: 60px;
+    background: var(--color-primary);
+    color: var(--color-white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+}
+
+.featured-author .author-info strong {
+    display: block;
+    font-size: 1.125rem;
+}
+
+.featured-author .author-info span {
+    font-size: 0.875rem;
+    color: var(--color-text-light);
+}
+
+.featured-image img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+}
+
+.testimonials-section {
+    padding: 100px 0;
+    background: var(--color-off-white);
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.testimonial-card {
+    background: var(--color-white);
+    padding: 30px;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition-normal);
+}
+
+.testimonial-card:hover {
+    box-shadow: var(--shadow-lg);
+}
+
+.testimonial-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.testimonial-rating {
+    display: flex;
+    gap: 2px;
+}
+
+.testimonial-rating svg {
+    width: 16px;
+    height: 16px;
+    color: var(--color-accent);
+}
+
+.service-tag {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 5px 10px;
+    background: var(--color-cream);
+    color: var(--color-primary);
+}
+
+.testimonial-text {
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    color: var(--color-text);
+    margin-bottom: 20px;
+    font-style: italic;
+}
+
+.testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.testimonial-author .author-avatar {
+    width: 45px;
+    height: 45px;
+    background: var(--color-primary);
+    color: var(--color-white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.testimonial-author .author-info strong {
+    display: block;
+    font-size: 0.9375rem;
+}
+
+.testimonial-author .author-info span {
+    font-size: 0.8125rem;
+    color: var(--color-text-light);
+}
+
+.platforms-section {
+    padding: 100px 0;
+    background: var(--color-white);
+}
+
+.platforms-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.platform-card {
+    text-align: center;
+    padding: 40px 30px;
+    background: var(--color-gray-100);
+    transition: var(--transition-normal);
+}
+
+.platform-card:hover {
+    background: var(--color-cream);
+}
+
+.platform-logo {
+    width: 60px;
+    height: 60px;
+    background: var(--color-primary);
+    color: var(--color-white);
+    font-size: 1.5rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 15px;
+    border-radius: 10px;
+}
+
+.platform-card h3 {
+    font-size: 1.125rem;
+    margin-bottom: 10px;
+}
+
+.platform-rating {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.rating-number {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-primary);
+}
+
+.stars {
+    display: flex;
+    gap: 2px;
+}
+
+.stars svg {
+    width: 16px;
+    height: 16px;
+    color: var(--color-accent);
+}
+
+.platform-card > p {
+    font-size: 0.875rem;
+    color: var(--color-text-light);
+}
+
+@media (max-width: 1024px) {
+    .testimonials-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .featured-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .featured-image {
+        order: -1;
+    }
+    
+    .featured-quote {
+        padding: 30px;
+    }
+    
+    .testimonials-grid,
+    .platforms-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>

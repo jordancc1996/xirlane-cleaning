@@ -1,0 +1,203 @@
+---
+// About Section Component
+---
+
+<section class="about" id="about">
+    <div class="container">
+        <div class="about-grid">
+            <div class="about-images">
+                <div class="about-image-main">
+                    <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=600&h=800&fit=crop" alt="Professional cleaner at work">
+                </div>
+                <div class="about-image-secondary">
+                    <img src="https://images.unsplash.com/photo-1628177142898-93e36e4e3a50?w=400&h=300&fit=crop" alt="Clean modern living room">
+                </div>
+                <div class="about-experience">
+                    <span class="experience-number">10+</span>
+                    <span class="experience-text">Years of Excellence</span>
+                </div>
+            </div>
+            <div class="about-content">
+                <p class="section-tagline">About Xirlane Cleaning</p>
+                <h2 class="section-title">Elevating Home Care to an Art Form</h2>
+                <p class="about-text">Founded in Philadelphia, Xirlane Cleaning was born from a simple belief: every home deserves the highest standard of care. We're not just a cleaning service—we're your partners in creating a sanctuary.</p>
+                <p class="about-text">Our team of professionally trained specialists brings precision, discretion, and genuine care to every home we service. We use only premium, eco-friendly products that are safe for your family, pets, and the environment.</p>
+                <div class="about-features">
+                    <div class="about-feature">
+                        <div class="feature-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                            </svg>
+                        </div>
+                        <div class="feature-text">
+                            <h4>Fully Insured & Bonded</h4>
+                            <p>Complete protection for your peace of mind</p>
+                        </div>
+                    </div>
+                    <div class="about-feature">
+                        <div class="feature-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                            </svg>
+                        </div>
+                        <div class="feature-text">
+                            <h4>Background Checked Team</h4>
+                            <p>Every team member thoroughly vetted</p>
+                        </div>
+                    </div>
+                    <div class="about-feature">
+                        <div class="feature-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                            </svg>
+                        </div>
+                        <div class="feature-text">
+                            <h4>Eco-Friendly Products</h4>
+                            <p>Safe for family, pets & planet</p>
+                        </div>
+                    </div>
+                </div>
+                <a href="#book" class="btn btn-primary">Schedule a Consultation</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+.about {
+    padding: var(--section-padding) 0;
+    background-color: var(--color-white);
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+}
+
+.about-images {
+    position: relative;
+}
+
+.about-image-main {
+    width: 85%;
+    position: relative;
+    z-index: 1;
+}
+
+.about-image-main img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+}
+
+.about-image-secondary {
+    position: absolute;
+    bottom: -40px;
+    right: 0;
+    width: 60%;
+    z-index: 2;
+    box-shadow: var(--shadow-xl);
+}
+
+.about-image-secondary img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.about-experience {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    padding: 30px;
+    text-align: center;
+    z-index: 3;
+}
+
+.experience-number {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--color-accent);
+}
+
+.experience-text {
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.about-content .section-tagline,
+.about-content .section-title {
+    text-align: left;
+}
+
+.about-text {
+    color: var(--color-text-light);
+    margin-bottom: 20px;
+    font-size: 1.0625rem;
+}
+
+.about-features {
+    margin: 40px 0;
+}
+
+.about-feature {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.feature-icon {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    color: var(--color-accent-dark);
+}
+
+.feature-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.feature-text h4 {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.feature-text p {
+    font-size: 0.875rem;
+    color: var(--color-text-light);
+}
+
+@media (max-width: 1024px) {
+    .about-grid {
+        gap: 50px;
+    }
+}
+
+@media (max-width: 768px) {
+    .about-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .about-images {
+        order: -1;
+        margin-bottom: 20px;
+    }
+    
+    .about-image-main img {
+        height: 350px;
+    }
+}
+</style>

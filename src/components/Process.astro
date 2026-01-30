@@ -1,0 +1,114 @@
+---
+// Process Section Component
+const steps = [
+  {
+    number: 1,
+    title: 'Book Online or Call',
+    description: 'Schedule your cleaning in minutes through our easy online form or give us a call to discuss your needs.'
+  },
+  {
+    number: 2,
+    title: 'Customized Plan',
+    description: "We'll create a personalized cleaning plan based on your home's unique requirements and your preferences."
+  },
+  {
+    number: 3,
+    title: 'Expert Cleaning',
+    description: 'Our trained professionals arrive on time and transform your space with meticulous attention to detail.'
+  },
+  {
+    number: 4,
+    title: 'Enjoy Your Home',
+    description: 'Return to a pristine, fresh-smelling home. Relax and enjoy the luxury of a professionally cleaned space.'
+  }
+];
+---
+
+<section class="process">
+    <div class="container">
+        <div class="section-header">
+            <p class="section-tagline">How It Works</p>
+            <h2 class="section-title">Simple Steps to a Spotless Home</h2>
+        </div>
+        <div class="process-steps">
+            {steps.map((step, index) => (
+                <>
+                    <div class="process-step">
+                        <div class="step-number">{step.number}</div>
+                        <div class="step-content">
+                            <h3>{step.title}</h3>
+                            <p>{step.description}</p>
+                        </div>
+                    </div>
+                    {index < steps.length - 1 && <div class="process-connector"></div>}
+                </>
+            ))}
+        </div>
+    </div>
+</section>
+
+<style>
+.process {
+    padding: var(--section-padding) 0;
+    background-color: var(--color-white);
+}
+
+.process-steps {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.process-step {
+    flex: 1;
+    text-align: center;
+    max-width: 250px;
+}
+
+.step-number {
+    width: 60px;
+    height: 60px;
+    background-color: var(--color-primary);
+    color: var(--color-accent);
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+}
+
+.step-content h3 {
+    font-size: 1.125rem;
+    margin-bottom: 10px;
+}
+
+.step-content p {
+    font-size: 0.9375rem;
+    color: var(--color-text-light);
+}
+
+.process-connector {
+    width: 80px;
+    height: 2px;
+    background: linear-gradient(to right, var(--color-primary), var(--color-accent));
+    margin-top: 30px;
+    flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+    .process-steps {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .process-connector {
+        width: 2px;
+        height: 40px;
+        margin: 10px 0;
+    }
+}
+</style>

@@ -1,0 +1,511 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import CTA from '../components/CTA.astro';
+import Footer from '../components/Footer.astro';
+
+const differences = [
+  {
+    number: '01',
+    title: 'White-Glove Service',
+    description: 'From the moment we arrive to our final walkthrough, every interaction reflects our commitment to excellence. We wear shoe covers, use protective pads, and treat your home with the reverence it deserves.',
+    details: ['Uniformed professionals', 'Arrival notifications', 'Detailed walkthrough', 'Follow-up quality check']
+  },
+  {
+    number: '02',
+    title: 'Rigorously Trained Team',
+    description: 'Our cleaners undergo 40+ hours of hands-on training before their first solo assignment. They learn not just how to clean, but how to care—for your home, your belongings, and your trust.',
+    details: ['40+ hours initial training', 'Monthly skill workshops', 'Quality certifications', 'Ongoing education']
+  },
+  {
+    number: '03',
+    title: 'Customized Cleaning Plans',
+    description: 'No two homes are alike, and neither are our cleaning plans. We work with you to create a personalized checklist that addresses your specific needs, preferences, and priorities.',
+    details: ['Initial home assessment', 'Personalized checklist', 'Flexible service options', 'Special requests welcome']
+  },
+  {
+    number: '04',
+    title: 'Satisfaction Guaranteed',
+    description: 'If anything doesn\'t meet your expectations, contact us within 24 hours and we\'ll return to make it right—no questions asked, no additional charge. Your happiness is our measure of success.',
+    details: ['24-hour guarantee window', 'Free re-cleaning', 'No questions asked', 'Direct manager access']
+  },
+  {
+    number: '05',
+    title: 'Consistent Excellence',
+    description: 'Request the same cleaning team for every visit. Building a relationship with professionals who know your home means better results and greater peace of mind.',
+    details: ['Same team each visit', 'Detailed home notes', 'Preference tracking', 'Relationship continuity']
+  },
+  {
+    number: '06',
+    title: 'Eco-Friendly Products',
+    description: 'We use only premium, environmentally responsible cleaning products that are tough on dirt but gentle on your family, pets, and the planet.',
+    details: ['Plant-based formulas', 'No harsh chemicals', 'Pet & child safe', 'Biodegradable products']
+  }
+];
+
+const comparison = [
+  { feature: 'Thorough Background Checks', xirlane: true, others: 'Sometimes' },
+  { feature: '$2M Liability Insurance', xirlane: true, others: 'Varies' },
+  { feature: 'Eco-Friendly Products', xirlane: true, others: 'Rarely' },
+  { feature: 'Same Team Each Visit', xirlane: true, others: 'No' },
+  { feature: 'Satisfaction Guarantee', xirlane: true, others: 'Limited' },
+  { feature: '24/7 Customer Support', xirlane: true, others: 'Business Hours' },
+  { feature: 'Customized Cleaning Plans', xirlane: true, others: 'No' },
+  { feature: 'Detailed Quality Checks', xirlane: true, others: 'No' }
+];
+---
+
+<Layout title="Why Choose Us | Xirlane Cleaning - The Xirlane Difference">
+    <Navbar />
+    
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <p class="hero-tagline">The Xirlane Difference</p>
+            <h1>Why Choose Us</h1>
+            <p class="hero-description">Discover what sets Xirlane Cleaning apart and why Philadelphia's most discerning homeowners trust us with their homes.</p>
+        </div>
+    </section>
+
+    <!-- Intro Section -->
+    <section class="intro-section">
+        <div class="container">
+            <div class="intro-content">
+                <h2>Not All Cleaning Services Are Created Equal</h2>
+                <p>In a city full of cleaning options, why do hundreds of Philadelphia families choose Xirlane? Because we're not just another cleaning service—we're your partners in creating a healthier, more beautiful home.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Differences Section -->
+    <section class="differences-section">
+        <div class="container">
+            {differences.map((item) => (
+                <div class="difference-card">
+                    <div class="difference-number">{item.number}</div>
+                    <div class="difference-content">
+                        <h3>{item.title}</h3>
+                        <p>{item.description}</p>
+                        <ul class="difference-details">
+                            {item.details.map((detail) => (
+                                <li>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                    {detail}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </div>
+            ))}
+        </div>
+    </section>
+
+    <!-- Comparison Section -->
+    <section class="comparison-section">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-tagline">See The Difference</p>
+                <h2 class="section-title">How We Compare</h2>
+            </div>
+            <div class="comparison-table">
+                <div class="table-header">
+                    <div class="feature-col">Feature</div>
+                    <div class="xirlane-col">Xirlane Cleaning</div>
+                    <div class="others-col">Other Services</div>
+                </div>
+                {comparison.map((row) => (
+                    <div class="table-row">
+                        <div class="feature-col">{row.feature}</div>
+                        <div class="xirlane-col">
+                            {row.xirlane === true ? (
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" class="check-icon">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                            ) : row.xirlane}
+                        </div>
+                        <div class="others-col">{row.others}</div>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </section>
+
+    <!-- Promise Section -->
+    <section class="promise-section">
+        <div class="container">
+            <div class="promise-grid">
+                <div class="promise-content">
+                    <p class="section-tagline">Our Promise</p>
+                    <h2>The Xirlane Guarantee</h2>
+                    <p>We stand behind every cleaning with an ironclad satisfaction guarantee. If any aspect of our service doesn't meet your expectations, we'll make it right—period.</p>
+                    <ul class="promise-list">
+                        <li>
+                            <strong>100% Satisfaction Guarantee</strong>
+                            <span>Not happy? We'll re-clean for free within 24 hours</span>
+                        </li>
+                        <li>
+                            <strong>No Contracts Required</strong>
+                            <span>Flexibility to pause or cancel anytime</span>
+                        </li>
+                        <li>
+                            <strong>Transparent Pricing</strong>
+                            <span>No hidden fees, ever</span>
+                        </li>
+                        <li>
+                            <strong>Fully Protected</strong>
+                            <span>$2M liability insurance & bonded team</span>
+                        </li>
+                    </ul>
+                    <a href="/contact" class="btn btn-primary">Experience The Difference</a>
+                </div>
+                <div class="promise-image">
+                    <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&h=700&fit=crop" alt="Beautiful clean home">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial Highlight -->
+    <section class="testimonial-highlight">
+        <div class="container">
+            <blockquote>
+                <p>"After trying three other cleaning services, we finally found Xirlane. The difference is night and day. It's not just clean—it's a completely different level of care and attention."</p>
+                <footer>
+                    <strong>Jennifer & Michael Thompson</strong>
+                    <span>Chestnut Hill, 3+ Year Clients</span>
+                </footer>
+            </blockquote>
+        </div>
+    </section>
+
+    <CTA />
+    <Footer />
+</Layout>
+
+<style>
+.page-hero {
+    position: relative;
+    padding: 180px 0 100px;
+    background-image: url('https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1920&h=600&fit=crop');
+    background-size: cover;
+    background-position: center;
+    text-align: center;
+}
+
+.page-hero .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(26, 58, 47, 0.95) 0%, rgba(15, 38, 32, 0.9) 100%);
+}
+
+.page-hero .hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.page-hero .hero-tagline {
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 16px;
+}
+
+.page-hero h1 {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    color: var(--color-white);
+    margin-bottom: 20px;
+}
+
+.page-hero .hero-description {
+    font-size: 1.125rem;
+    color: rgba(255, 255, 255, 0.85);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.intro-section {
+    padding: 80px 0;
+    background: var(--color-white);
+    text-align: center;
+}
+
+.intro-content {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.intro-content h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.intro-content p {
+    font-size: 1.125rem;
+    color: var(--color-text-light);
+    line-height: 1.8;
+}
+
+.differences-section {
+    padding: 80px 0;
+    background: var(--color-off-white);
+}
+
+.difference-card {
+    display: flex;
+    gap: 40px;
+    background: var(--color-white);
+    padding: 50px;
+    margin-bottom: 30px;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition-normal);
+}
+
+.difference-card:hover {
+    box-shadow: var(--shadow-lg);
+}
+
+.difference-number {
+    font-family: var(--font-heading);
+    font-size: 4rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    opacity: 0.3;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+.difference-content h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.difference-content > p {
+    color: var(--color-text-light);
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+.difference-details {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.difference-details li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9375rem;
+    color: var(--color-text);
+}
+
+.difference-details svg {
+    width: 18px;
+    height: 18px;
+    color: var(--color-accent-dark);
+    flex-shrink: 0;
+}
+
+.comparison-section {
+    padding: 100px 0;
+    background: var(--color-white);
+}
+
+.comparison-table {
+    max-width: 800px;
+    margin: 0 auto;
+    border: 1px solid var(--color-gray-200);
+}
+
+.table-header,
+.table-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+}
+
+.table-header {
+    background: var(--color-primary);
+    color: var(--color-white);
+    font-weight: 600;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.table-header div,
+.table-row div {
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+}
+
+.table-row {
+    border-bottom: 1px solid var(--color-gray-200);
+}
+
+.table-row:last-child {
+    border-bottom: none;
+}
+
+.table-row:nth-child(even) {
+    background: var(--color-gray-100);
+}
+
+.feature-col {
+    font-weight: 500;
+}
+
+.xirlane-col {
+    background: rgba(26, 58, 47, 0.05);
+    justify-content: center;
+    font-weight: 600;
+    color: var(--color-primary);
+}
+
+.table-header .xirlane-col {
+    background: var(--color-accent);
+    color: var(--color-primary-dark);
+}
+
+.others-col {
+    justify-content: center;
+    color: var(--color-text-light);
+}
+
+.check-icon {
+    width: 24px;
+    height: 24px;
+    color: var(--color-primary);
+}
+
+.promise-section {
+    padding: 100px 0;
+    background: var(--color-off-white);
+}
+
+.promise-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.promise-content .section-tagline {
+    text-align: left;
+}
+
+.promise-content h2 {
+    font-size: 2.25rem;
+    margin-bottom: 20px;
+}
+
+.promise-content > p {
+    color: var(--color-text-light);
+    line-height: 1.8;
+    margin-bottom: 30px;
+}
+
+.promise-list {
+    margin-bottom: 30px;
+}
+
+.promise-list li {
+    padding: 15px 0;
+    border-bottom: 1px solid var(--color-gray-200);
+}
+
+.promise-list li strong {
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 5px;
+}
+
+.promise-list li span {
+    font-size: 0.875rem;
+    color: var(--color-text-light);
+}
+
+.promise-image img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+}
+
+.testimonial-highlight {
+    padding: 100px 0;
+    background: var(--color-primary);
+    text-align: center;
+}
+
+.testimonial-highlight blockquote {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.testimonial-highlight p {
+    font-family: var(--font-heading);
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-style: italic;
+    color: var(--color-white);
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.testimonial-highlight footer strong {
+    display: block;
+    color: var(--color-accent);
+    font-size: 1.125rem;
+    margin-bottom: 5px;
+}
+
+.testimonial-highlight footer span {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.875rem;
+}
+
+@media (max-width: 768px) {
+    .difference-card {
+        flex-direction: column;
+        gap: 20px;
+        padding: 30px;
+    }
+    
+    .difference-number {
+        font-size: 3rem;
+    }
+    
+    .difference-details {
+        grid-template-columns: 1fr;
+    }
+    
+    .table-header,
+    .table-row {
+        grid-template-columns: 1.5fr 1fr 1fr;
+    }
+    
+    .table-header div,
+    .table-row div {
+        padding: 12px 10px;
+        font-size: 0.8125rem;
+    }
+    
+    .promise-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .promise-image {
+        order: -1;
+    }
+}
+</style>
