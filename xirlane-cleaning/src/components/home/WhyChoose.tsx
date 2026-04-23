@@ -18,7 +18,7 @@ const items = [
 export default function WhyChoose() {
   return (
     <motion.section
-      className="bg-background py-16 md:py-24"
+      className="bg-background py-16 md:py-20"
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
@@ -37,9 +37,9 @@ export default function WhyChoose() {
         </div>
 
         <div className="lg:col-span-3">
-          <ul className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+          <ul className="grid grid-cols-1 gap-x-6 gap-y-2.5 lg:grid-cols-3">
             {items.map((item) => (
-              <li key={item} className="flex items-start gap-3 text-[14px] text-text-primary">
+              <li key={item} className="flex items-start gap-2.5 text-[14px] leading-snug text-text-primary">
                 <span className="mt-0.5 text-accent">✓</span>
                 <span>{item}</span>
               </li>

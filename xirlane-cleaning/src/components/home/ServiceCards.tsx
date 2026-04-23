@@ -37,7 +37,7 @@ const cards = [
 
 export default function ServiceCards() {
   return (
-    <section className="bg-section-alt-bg py-16 md:py-24">
+    <section className="bg-section-alt-bg py-16 md:py-20">
       <div className="site-container">
         <div className="mx-auto max-w-3xl text-center">
           <EyebrowLabel>OUR SERVICES</EyebrowLabel>
@@ -50,7 +50,7 @@ export default function ServiceCards() {
           </p>
         </div>
 
-        <div className="mt-12 space-y-6">
+        <div className="mt-6 space-y-6 md:mt-8">
           {cards.map((card, index) => (
             <motion.article
               key={card.headline}

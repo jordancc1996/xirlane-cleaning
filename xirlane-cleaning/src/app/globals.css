@@ -62,7 +62,7 @@ body {
   }
 
   .section-spacing {
-    @apply py-16 md:py-24;
+    @apply py-16 md:py-20;
   }
 
   .card-base {

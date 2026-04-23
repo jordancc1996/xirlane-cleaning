@@ -1,6 +1,6 @@
 export default function Newsletter() {
   return (
-    <section className="bg-text-primary py-16 md:py-24">
+    <section className="bg-text-primary py-16 md:py-20">
       <div className="site-container">
         <div className="mx-auto max-w-2xl text-center">
           <p className="text-[11px] font-medium uppercase tracking-eyebrow text-accent">STAY IN THE LOOP</p>
@@ -10,7 +10,7 @@ export default function Newsletter() {
           <p className="mt-4 text-[15px] text-white/70">
             Join our newsletter for helpful cleaning tips, discount codes, and subscriber-only deals.
           </p>
-          <form className="mt-10 flex flex-col items-stretch gap-4 md:flex-row">
+          <form className="mt-8 flex flex-col items-stretch gap-4 md:flex-row">
             <input
               type="email"
               placeholder="Your email address"

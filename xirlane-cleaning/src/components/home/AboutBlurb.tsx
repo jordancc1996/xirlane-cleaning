@@ -6,7 +6,7 @@ import EyebrowLabel from "@/components/ui/EyebrowLabel";
 export default function AboutBlurb() {
   return (
     <motion.section
-      className="bg-section-alt-bg py-20"
+      className="bg-section-alt-bg py-16 md:py-20"
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
@@ -22,7 +22,7 @@ export default function AboutBlurb() {
             post-construction cleaning with flexible options for one-time or recurring visits. Our
             friendly crew is here to make your space shine.
           </p>
-          <div className="mx-auto mt-10 h-px w-[60px] bg-accent" />
+          <div className="mx-auto mt-5 h-px w-[60px] bg-accent" />
         </div>
       </div>
     </motion.section>

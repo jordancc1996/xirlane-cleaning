@@ -27,8 +27,8 @@ export default function Hero() {
   };
 
   return (
-    <section className="min-h-screen bg-background">
-      <div className="site-container grid min-h-screen grid-cols-1 items-center gap-10 py-10 lg:grid-cols-2 lg:gap-16">
+    <section className="bg-background">
+      <div className="site-container grid grid-cols-1 items-start gap-10 pb-12 pt-6 lg:grid-cols-2 lg:items-center lg:gap-16 lg:pb-16 lg:pt-10">
         <motion.div
           variants={container}
           initial="hidden"

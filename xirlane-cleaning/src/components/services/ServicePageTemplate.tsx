@@ -61,7 +61,7 @@ export default function ServicePageTemplate({
         </div>
       </section>
 
-      <section className="bg-background py-16 md:py-24">
+      <section className="bg-background py-16 md:py-20">
         <motion.div
           className="site-container"
           initial={{ opacity: 0, y: 24 }}
@@ -117,7 +117,7 @@ export default function ServicePageTemplate({
         </motion.div>
       </section>
 
-      <section className="bg-text-primary py-16 text-center">
+      <section className="bg-text-primary py-16 text-center md:py-20">
         <motion.div
           className="site-container"
           initial={{ opacity: 0, y: 24 }}

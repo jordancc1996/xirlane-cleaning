@@ -23,14 +23,14 @@ const testimonials = [
 
 export default function Testimonials() {
   return (
-    <section className="bg-background py-16 md:py-24">
+    <section className="bg-background py-16 md:py-20">
       <div className="site-container">
         <div className="mx-auto max-w-3xl text-center">
           <EyebrowLabel>WHAT OUR CLIENTS SAY</EyebrowLabel>
           <h2 className="mt-4 text-h2-mobile text-text-primary md:text-h2">Real Homes. Real Results.</h2>
         </div>
 
-        <div className="mt-12 hidden gap-8 md:grid md:grid-cols-3">
+        <div className="mt-8 hidden gap-8 md:grid md:grid-cols-3">
           {testimonials.map((testimonial, index) => (
             <motion.article
               key={testimonial.name}
@@ -50,7 +50,7 @@ export default function Testimonials() {
           ))}
         </div>
 
-        <div className="mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 md:hidden">
+        <div className="mt-6 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 md:hidden">
           {testimonials.map((testimonial, index) => (
             <motion.article
               key={testimonial.name}
