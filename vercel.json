@@ -1,7 +1,0 @@
-{
-  "version": 2,
-  "framework": "nextjs",
-  "installCommand": "cd xirlane-cleaning && npm install",
-  "buildCommand": "cd xirlane-cleaning && npm run build",
-  "devCommand": "cd xirlane-cleaning && npm run dev"
-}
