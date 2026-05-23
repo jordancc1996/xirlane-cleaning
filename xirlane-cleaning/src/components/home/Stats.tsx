@@ -1,7 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
-
 const stats = [
   { value: "5", label: "Star Reviews" },
   { value: "500+", label: "Visits Per Month" },
@@ -10,14 +6,17 @@ const stats = [
 
 export default function Stats() {
   return (
-    <motion.section
+    <section
       className="bg-text-primary py-16 md:py-20"
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
+      aria-labelledby="trust-stats-heading"
     >
       <div className="site-container">
+        <h2
+          id="trust-stats-heading"
+          className="mb-10 text-center font-heading text-[28px] font-light text-white md:text-[34px]"
+        >
+          Trusted by Philadelphia Homeowners &amp; Businesses
+        </h2>
         <div className="grid divide-y divide-accent md:grid-cols-3 md:divide-x md:divide-y-0">
           {stats.map((stat) => (
             <div key={stat.label} className="py-6 text-center md:py-2">
@@ -29,6 +28,6 @@ export default function Stats() {
           ))}
         </div>
       </div>
-    </motion.section>
+    </section>
   );
 }

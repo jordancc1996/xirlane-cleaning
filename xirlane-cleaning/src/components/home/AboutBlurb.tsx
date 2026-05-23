@@ -1,30 +1,45 @@
-"use client";
-
-import { motion } from "framer-motion";
+import Link from "next/link";
 import EyebrowLabel from "@/components/ui/EyebrowLabel";
 
 export default function AboutBlurb() {
   return (
-    <motion.section
+    <section
       className="bg-section-alt-bg py-16 md:py-20"
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
+      aria-labelledby="about-residential-heading"
     >
       <div className="site-container">
         <div className="mx-auto max-w-3xl text-center">
           <EyebrowLabel className="justify-center text-center">WHO WE ARE</EyebrowLabel>
-          <p className="mt-8 font-heading text-[24px] font-light leading-[1.8] text-text-primary">
-            At Xirlane Cleaning, we deliver high-quality, professional cleaning with a personal touch.
-            Serving all of the Greater Philadelphia area — including Philadelphia, Montgomery County,
-            Delaware County, Chester County, and Bucks County — we offer home, business, and
-            post-construction cleaning with flexible options for one-time or recurring visits. Our
-            friendly crew is here to make your space shine.
+          <h2
+            id="about-residential-heading"
+            className="mt-4 text-h2-mobile text-text-primary md:text-h2"
+          >
+            Residential Cleaning Across Greater Philadelphia
+          </h2>
+          <p className="mt-6 text-[15px] leading-relaxed text-text-body">
+            At Xirlane Cleaning, we deliver high-quality residential cleaning in Philadelphia
+            with the same care for every room, every visit. Homeowners across Montgomery,
+            Delaware, Chester, and Bucks County book us for weekly, biweekly, and monthly
+            plans — or a single visit when life gets busy.
+          </p>
+          <p className="mt-4 text-[15px] leading-relaxed text-text-body">
+            We also support offices and worksites with{" "}
+            <Link href="/services/commercial-cleaning" className="text-accent hover:underline">
+              commercial cleaning in Philadelphia
+            </Link>
+            , plus specialized{" "}
+            <Link href="/services/deep-cleaning" className="text-accent hover:underline">
+              deep cleaning services
+            </Link>{" "}
+            and{" "}
+            <Link href="/services/post-construction" className="text-accent hover:underline">
+              move-out cleaning
+            </Link>{" "}
+            when you need a full reset. Our friendly crew is here to make your space shine.
           </p>
           <div className="mx-auto mt-5 h-px w-[60px] bg-accent" />
         </div>
       </div>
-    </motion.section>
+    </section>
   );
 }

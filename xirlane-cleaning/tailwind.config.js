@@ -43,6 +43,8 @@ const config = {
       },
       boxShadow: {
         cardHover: "0 12px 28px rgba(26, 26, 26, 0.08)",
+        gallery: "0 4px 24px rgba(26, 26, 26, 0.06)",
+        "gallery-hover": "0 16px 40px rgba(26, 26, 26, 0.12)",
       },
       transitionDuration: {
         300: "300ms",

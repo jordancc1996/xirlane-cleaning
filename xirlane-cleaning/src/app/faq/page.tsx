@@ -1,10 +1,63 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import PageKnowledgeBlock from "@/components/seo/PageKnowledgeBlock";
+import { JsonLdGraph } from "@/components/seo/JsonLd";
+import { PAGE_KNOWLEDGE } from "@/lib/ai-page-knowledge";
+import { FAQ_ITEMS } from "@/lib/faqs";
+import { PAGE_SEO } from "@/lib/page-metadata";
+import { breadcrumbSchema, faqPageSchema } from "@/lib/schema";
+import { createPageMetadata } from "@/lib/seo";
+
+const meta = PAGE_SEO.faq;
+
+export const metadata: Metadata = createPageMetadata({
+  title: meta.title,
+  description: meta.description,
+  path: meta.path,
+  keywords: [...meta.keywords],
+  ogImageAlt: meta.ogImageAlt,
+});
+
 export default function FaqPage() {
   return (
     <main className="section-spacing bg-background">
-      <div className="site-container">
-        <h1 className="text-h1-mobile md:text-h1">FAQ</h1>
-        <p className="mt-4 max-w-2xl text-text-body">
-          Common questions about booking, supplies, scheduling, and service areas.
+      <JsonLdGraph
+        nodes={[
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "FAQ", path: "/faq" },
+          ]),
+          faqPageSchema([...FAQ_ITEMS]),
+        ]}
+      />
+      <PageKnowledgeBlock knowledge={PAGE_KNOWLEDGE.faq} />
+      <div className="site-container max-w-3xl">
+        <p className="text-[11px] uppercase tracking-eyebrow text-accent">FAQ</p>
+        <h1 className="mt-4 text-h1-mobile md:text-h1">Frequently Asked Questions</h1>
+        <p className="mt-4 text-text-body">
+          Common questions about booking, supplies, scheduling, pricing, and service areas
+          across Philadelphia, Montgomery, Delaware, Chester, and Bucks County.
+        </p>
+
+        <div className="mt-12 space-y-8">
+          {FAQ_ITEMS.map((faq) => (
+            <article key={faq.question} className="border-b border-border-light pb-8">
+              <h2 className="text-h3-mobile text-text-primary md:text-h3">{faq.question}</h2>
+              <p className="mt-3 text-text-body">{faq.answer}</p>
+            </article>
+          ))}
+        </div>
+
+        <p className="mt-12 text-text-body">
+          Ready for a quote?{" "}
+          <Link href="/contact" className="text-accent underline-offset-4 hover:underline">
+            Contact Xirlane Cleaning
+          </Link>{" "}
+          or browse our{" "}
+          <Link href="/services" className="text-accent underline-offset-4 hover:underline">
+            cleaning services
+          </Link>
+          .
         </p>
       </div>
     </main>

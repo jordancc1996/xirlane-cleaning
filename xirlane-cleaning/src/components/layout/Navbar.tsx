@@ -1,6 +1,5 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -8,6 +7,7 @@ import { HiBars3, HiXMark } from "react-icons/hi2";
 
 const primaryLinks = [
   { href: "/", label: "Home" },
+  { href: "/gallery", label: "Gallery" },
   { href: "/faq", label: "FAQ" },
   { href: "/contact", label: "Contact" },
 ];
@@ -23,6 +23,7 @@ const mobileLinks = [
   { href: "/", label: "Home" },
   { href: "/services", label: "Services" },
   ...serviceLinks,
+  { href: "/gallery", label: "Gallery" },
   { href: "/faq", label: "FAQ" },
   { href: "/contact", label: "Contact" },
 ];
@@ -38,18 +39,19 @@ export default function Navbar() {
   };
 
   useEffect(() => {
-    const onScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-
+    const onScroll = () => setIsScrolled(window.scrollY > 50);
     onScroll();
-    window.addEventListener("scroll", onScroll);
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [pathname]);
+
   return (
     <>
-      <header className="fixed top-9 z-50 w-full transition-all duration-300 ease-in-out">
+      <header className="fixed top-9 z-50 w-full transition-all duration-300 ease-in-out" role="banner">
         <div className="hidden h-9 items-center justify-center bg-section-alt-bg px-4 lg:flex">
           <p className="text-center text-[11px] uppercase tracking-wide text-text-body">
             Serving Philadelphia, Montgomery County, Delaware County, Chester County &amp; Bucks County
@@ -64,7 +66,7 @@ export default function Navbar() {
           }`}
         >
           <div className="site-container grid h-full grid-cols-[1fr_auto_1fr] items-center">
-            <nav className="hidden items-center gap-8 lg:flex">
+            <nav className="hidden items-center gap-8 lg:flex" aria-label="Primary">
               {primaryLinks.map((link) => (
                 <Link
                   key={link.href}
@@ -122,6 +124,8 @@ export default function Navbar() {
               type="button"
               className="justify-self-end text-text-primary lg:hidden"
               onClick={() => setMobileOpen((prev) => !prev)}
+              aria-expanded={mobileOpen}
+              aria-controls="mobile-navigation"
               aria-label="Toggle navigation menu"
             >
               {mobileOpen ? <HiXMark size={24} /> : <HiBars3 size={24} />}
@@ -129,45 +133,43 @@ export default function Navbar() {
           </div>
         </div>
 
-        <AnimatePresence>
-          {mobileOpen && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "calc(100vh - 80px)", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="overflow-hidden bg-white lg:hidden"
-            >
-              <div className="flex h-full flex-col">
-                <div className="flex-1 overflow-y-auto border-t border-border-light">
-                  {mobileLinks.map((link) => (
-                    <Link
-                      key={link.href + link.label}
-                      href={link.href}
-                      onClick={() => setMobileOpen(false)}
-                      className={`flex h-12 items-center border-b border-border-light px-6 text-[13px] uppercase tracking-widest ${
-                        isActive(link.href) ? "text-accent" : "text-text-primary"
-                      }`}
-                    >
-                      {link.label}
-                    </Link>
-                  ))}
-                </div>
-                <div className="border-t border-border-light p-6">
-                  <Link
-                    href="/contact"
-                    onClick={() => setMobileOpen(false)}
-                    className="block w-full bg-button-primary-bg py-3 text-center text-[12px] uppercase tracking-widest text-button-primary-text transition-all duration-300 hover:bg-accent"
-                  >
-                    BOOK NOW &rarr;
-                  </Link>
-                </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+        <div
+          id="mobile-navigation"
+          aria-hidden={!mobileOpen}
+          className={`overflow-hidden bg-white transition-[max-height,opacity] duration-300 ease-in-out lg:hidden ${
+            mobileOpen
+              ? "max-h-[calc(100vh-80px)] opacity-100"
+              : "pointer-events-none max-h-0 opacity-0"
+          }`}
+        >
+          <div className="flex max-h-[calc(100vh-80px)] flex-col">
+            <div className="flex-1 overflow-y-auto border-t border-border-light">
+              {mobileLinks.map((link) => (
+                <Link
+                  key={link.href + link.label}
+                  href={link.href}
+                  onClick={() => setMobileOpen(false)}
+                  className={`flex h-12 items-center border-b border-border-light px-6 text-[13px] uppercase tracking-widest ${
+                    isActive(link.href) ? "text-accent" : "text-text-primary"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+            <div className="border-t border-border-light p-6">
+              <Link
+                href="/contact"
+                onClick={() => setMobileOpen(false)}
+                className="block w-full bg-button-primary-bg py-3 text-center text-[12px] uppercase tracking-widest text-button-primary-text transition-all duration-300 hover:bg-accent"
+              >
+                BOOK NOW &rarr;
+              </Link>
+            </div>
+          </div>
+        </div>
       </header>
-      <div className="h-[116px] lg:h-[152px]" />
+      <div className="h-[116px] lg:h-[152px]" aria-hidden="true" />
     </>
   );
 }

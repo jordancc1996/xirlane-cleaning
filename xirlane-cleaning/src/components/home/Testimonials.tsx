@@ -1,6 +1,4 @@
-"use client";
-
-import { motion } from "framer-motion";
+import Link from "next/link";
 import EyebrowLabel from "@/components/ui/EyebrowLabel";
 
 const testimonials = [
@@ -23,52 +21,52 @@ const testimonials = [
 
 export default function Testimonials() {
   return (
-    <section className="bg-background py-16 md:py-20">
+    <section
+      id="testimonials"
+      className="bg-background py-16 md:py-20"
+      aria-labelledby="testimonials-heading"
+    >
       <div className="site-container">
         <div className="mx-auto max-w-3xl text-center">
           <EyebrowLabel>WHAT OUR CLIENTS SAY</EyebrowLabel>
-          <h2 className="mt-4 text-h2-mobile text-text-primary md:text-h2">Real Homes. Real Results.</h2>
+          <h2 id="testimonials-heading" className="mt-4 text-h2-mobile text-text-primary md:text-h2">
+            Real Homes. Real Results.
+          </h2>
+          <p className="mt-4 text-[15px] text-text-body">
+            Philadelphia-area homeowners trust Xirlane for residential cleaning they can
+            count on — reliable crews, careful work, and results that show every visit.
+          </p>
         </div>
 
-        <div className="mt-8 hidden gap-8 md:grid md:grid-cols-3">
-          {testimonials.map((testimonial, index) => (
-            <motion.article
+        <ul className="mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 md:grid md:grid-cols-3 md:gap-8 md:overflow-visible">
+          {testimonials.map((testimonial) => (
+            <li
               key={testimonial.name}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.6, ease: "easeOut", delay: index * 0.15 }}
-              className="border border-border-light bg-white p-8"
+              className="w-[85%] shrink-0 snap-center border border-border-light bg-white p-8 md:w-auto"
             >
-              <p className="mb-4 text-accent">★★★★★</p>
-              <p className="text-[18px] italic leading-[1.8] text-text-primary">
-                {testimonial.quote}
-              </p>
-              <p className="mt-6 text-[12px] uppercase tracking-widest text-text-body">{testimonial.name}</p>
-              <p className="text-[10px] text-accent">Verified Google Review</p>
-            </motion.article>
+              <article>
+                <p className="mb-4 text-accent" aria-hidden="true">
+                  ★★★★★
+                </p>
+                <blockquote className="text-[18px] italic leading-[1.8] text-text-primary">
+                  <p>{testimonial.quote}</p>
+                </blockquote>
+                <footer className="mt-6">
+                  <p className="text-[12px] uppercase tracking-widest text-text-body">{testimonial.name}</p>
+                  <p className="text-[10px] text-accent">Verified Google Review</p>
+                </footer>
+              </article>
+            </li>
           ))}
-        </div>
+        </ul>
 
-        <div className="mt-6 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 md:hidden">
-          {testimonials.map((testimonial, index) => (
-            <motion.article
-              key={testimonial.name}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.6, ease: "easeOut", delay: index * 0.15 }}
-              className="w-[85%] shrink-0 snap-center border border-border-light bg-white p-8"
-            >
-              <p className="mb-4 text-accent">★★★★★</p>
-              <p className="text-[18px] italic leading-[1.8] text-text-primary">
-                {testimonial.quote}
-              </p>
-              <p className="mt-6 text-[12px] uppercase tracking-widest text-text-body">{testimonial.name}</p>
-              <p className="text-[10px] text-accent">Verified Google Review</p>
-            </motion.article>
-          ))}
-        </div>
+        <p className="mx-auto mt-8 max-w-xl text-center text-[14px] text-text-body">
+          Ready to book?{" "}
+          <Link href="/contact" className="text-accent hover:underline">
+            Request your free quote
+          </Link>
+          .
+        </p>
       </div>
     </section>
   );
