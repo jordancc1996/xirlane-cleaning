@@ -1,5 +1,4 @@
 import type { BlogCategorySlug } from "./blog-categories";
-import { categoryUrl, getCategorySlugsForRoutes } from "./blog-categories";
 import type { BlogPost } from "./blog-types";
 import { BLOG_POSTS_DATA } from "./blog-posts-data";
 import { sortPostsByDate } from "./blog-utils";
