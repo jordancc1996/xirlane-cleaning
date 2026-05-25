@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import { getPrefersReducedMotion } from "@/lib/motion";
 
 type UseScrollFadeInOptions = {
   threshold?: number;
