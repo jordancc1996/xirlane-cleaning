@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Button from "@/components/ui/Button";
+import HeroParallaxImage from "@/components/home/HeroParallaxImage";
 import { OptimizedFillImage } from "@/components/ui/OptimizedImage";
 import { IMAGE_SIZES } from "@/lib/images";
 
@@ -20,12 +21,12 @@ export default function Hero() {
 
           <h1
             id="home-hero-heading"
-            className="mt-6 text-h1-mobile font-light leading-[1.1] text-text-primary md:text-h1"
+            className="hero-fade-up mt-6 text-h1-mobile font-light leading-[1.1] text-text-primary md:text-h1"
           >
             House Cleaning &amp; Maid Service in Philadelphia
           </h1>
 
-          <p className="mt-4 font-heading text-[22px] font-light leading-snug text-text-primary md:text-[26px]">
+          <p className="hero-fade-up hero-fade-up-delay-120 mt-4 font-heading text-[22px] font-light leading-snug text-text-primary md:text-[26px]">
             A stress-free clean for your home or business.
           </p>
 
@@ -73,13 +74,15 @@ export default function Hero() {
         </div>
 
         <div className="order-1 lg:order-2">
-          <div className="relative aspect-[4/5] w-full min-h-[350px] lg:min-h-[min(72vh,760px)]">
-            <OptimizedFillImage
-              src={HERO_IMAGE}
-              alt="Professional house cleaning team in a Philadelphia home kitchen"
-              sizes={IMAGE_SIZES.hero}
-              priority={true}
-            />
+          <div className="relative aspect-[4/5] w-full min-h-[350px] overflow-hidden lg:min-h-[min(72vh,760px)]">
+            <HeroParallaxImage>
+              <OptimizedFillImage
+                src={HERO_IMAGE}
+                alt="Professional house cleaning team in a Philadelphia home kitchen"
+                sizes={IMAGE_SIZES.hero}
+                priority={true}
+              />
+            </HeroParallaxImage>
             <div
               className="pointer-events-none absolute -right-4 -bottom-4 h-full w-full border-2 border-accent"
               aria-hidden="true"

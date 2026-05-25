@@ -4,10 +4,10 @@ export const SITE_URL = "https://xirlanecleaning.com";
 export const BUSINESS = {
   name: "Xirlane Cleaning",
   legalName: "Xirlane Cleaning",
-  email: "hello@xirlanecleaning.com",
+  email: "admin@xirlanecleaning.com",
   /** Must match Google Business Profile exactly (E.164). */
-  phone: "+12150000000",
-  phoneDisplay: "(215) 000-0000",
+  phone: "+12676323162",
+  phoneDisplay: "(267) 632-3162",
   locality: "Philadelphia",
   region: "PA",
   postalCode: "19103",

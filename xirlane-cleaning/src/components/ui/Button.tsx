@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ReactNode } from "react";
 
-type ButtonVariant = "primary" | "ghost" | "light";
+type ButtonVariant = "primary" | "ghost" | "light" | "accent";
 
 interface ButtonProps {
   children: ReactNode;
@@ -19,6 +19,9 @@ const variants: Record<ButtonVariant, string> = {
     "bg-transparent border border-text-primary text-text-primary hover:bg-text-primary hover:text-button-primary-text hover:shadow-sm",
   light:
     "border border-white/90 bg-transparent text-white hover:border-accent hover:bg-accent hover:text-text-primary hover:shadow-md",
+  /** Filled accent — for primary actions on dark (bg-text-primary) sections. */
+  accent:
+    "border border-accent bg-accent text-text-primary shadow-sm hover:border-white hover:bg-white hover:text-text-primary hover:shadow-md",
 };
 
 export default function Button({

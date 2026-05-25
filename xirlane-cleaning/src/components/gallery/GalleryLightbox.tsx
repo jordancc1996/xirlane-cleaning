@@ -17,6 +17,7 @@ import {
   HiPlus,
   HiXMark,
 } from "react-icons/hi2";
+import { getPrefersReducedMotion } from "@/lib/motion";
 import { IMAGE_QUALITY } from "@/lib/images";
 import {
   GALLERY_ASPECT_DIMENSIONS,
@@ -44,7 +45,7 @@ export default function GalleryLightbox({
   const [zoom, setZoom] = useState(1);
   const [pan, setPan] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(() => getPrefersReducedMotion());
   const [mounted, setMounted] = useState(false);
 
   const dragStart = useRef({ x: 0, y: 0, panX: 0, panY: 0 });
@@ -92,7 +93,11 @@ export default function GalleryLightbox({
 
   useEffect(() => {
     setMounted(true);
-    requestAnimationFrame(() => setIsVisible(true));
+    if (getPrefersReducedMotion()) {
+      setIsVisible(true);
+    } else {
+      requestAnimationFrame(() => setIsVisible(true));
+    }
     closeButtonRef.current?.focus();
 
     return () => {
@@ -229,6 +234,11 @@ export default function GalleryLightbox({
   };
 
   const handleBackdropClick = () => {
+    if (getPrefersReducedMotion()) {
+      onClose();
+      return;
+    }
+
     setIsVisible(false);
     window.setTimeout(onClose, 200);
   };

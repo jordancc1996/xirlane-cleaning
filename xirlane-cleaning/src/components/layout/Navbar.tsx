@@ -7,8 +7,7 @@ import { HiBars3, HiXMark } from "react-icons/hi2";
 import { LOCATION_NAV_LINKS } from "@/lib/location-landing-pages";
 import { LANDING_NAV_LINKS } from "@/lib/seo-landing-pages";
 
-const primaryLinks = [
-  { href: "/", label: "Home" },
+const centerLinks = [
   { href: "/blog", label: "Blog" },
   { href: "/gallery", label: "Gallery" },
   { href: "/faq", label: "FAQ" },
@@ -19,14 +18,22 @@ const areaLinks = LOCATION_NAV_LINKS;
 
 const mobileLinks = [
   { href: "/", label: "Home" },
-  { href: "/services", label: "Services" },
-  { href: "/locations", label: "Neighborhoods" },
   { href: "/blog", label: "Blog" },
-  { href: "/service-areas", label: "Service areas" },
   { href: "/gallery", label: "Gallery" },
   { href: "/faq", label: "FAQ" },
+  { href: "/services", label: "Services" },
+  { href: "/locations", label: "Areas" },
+  { href: "/service-areas", label: "Service areas" },
   { href: "/contact", label: "Contact" },
 ];
+
+const navLinkClass = (active: boolean) =>
+  `whitespace-nowrap px-2 text-[13px] font-medium uppercase tracking-widest underline decoration-2 underline-offset-8 transition-colors duration-200 hover:text-accent lg:px-4 ${
+    active ? "decoration-accent text-accent" : "decoration-transparent text-text-primary"
+  }`;
+
+const bookNowLinkClass =
+  "book-now-shimmer bg-button-primary-bg text-button-primary-text transition-all duration-300 hover:bg-accent";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -53,13 +60,10 @@ export default function Navbar() {
 
   return (
     <>
-      <header className="fixed top-9 z-50 w-full transition-all duration-300 ease-in-out" role="banner">
-        <div className="hidden h-9 items-center justify-center bg-section-alt-bg px-4 lg:flex">
-          <p className="text-center text-[11px] uppercase tracking-wide text-text-body">
-            Serving Philadelphia, Montgomery County, Delaware County, Chester County &amp; Bucks County
-          </p>
-        </div>
-
+      <header
+        className="fixed top-9 z-50 w-full transition-all duration-300 ease-in-out"
+        role="banner"
+      >
         <div
           className={`transition-all duration-300 ease-in-out ${
             isScrolled
@@ -67,104 +71,94 @@ export default function Navbar() {
               : "border-b border-transparent bg-nav-bg-transparent shadow-none"
           }`}
         >
-          <div className="site-container relative flex items-center py-4 lg:py-5">
-            <nav className="hidden flex-1 items-center gap-8 lg:flex" aria-label="Primary">
-              {primaryLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className={`text-[13px] font-medium uppercase tracking-widest underline decoration-2 underline-offset-8 transition-colors duration-200 hover:text-accent ${
-                    isActive(link.href)
-                      ? "decoration-accent text-accent"
-                      : "decoration-transparent text-text-primary"
-                  }`}
-                >
-                  {link.label}
-                </Link>
-              ))}
-
-              <div className="group relative">
-                <Link
-                  href="/services"
-                  className={`text-[13px] font-medium uppercase tracking-widest underline decoration-2 underline-offset-8 transition-colors duration-200 hover:text-accent ${
-                    isActive("/services")
-                      ? "decoration-accent text-accent"
-                      : "decoration-transparent text-text-primary"
-                  }`}
-                >
-                  Services
-                </Link>
-                <div className="invisible absolute left-0 top-full z-50 mt-2 w-64 border border-border-light bg-white opacity-0 shadow-lg transition-all duration-200 group-hover:visible group-hover:opacity-100">
-                  {serviceLinks.map((service) => (
-                    <Link
-                      key={service.href}
-                      href={service.href}
-                      className="block px-6 py-3 text-[13px] text-text-primary transition-colors duration-200 hover:bg-section-alt-bg hover:text-accent"
-                    >
-                      {service.label}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-
-              <div className="group relative">
-                <Link
-                  href="/locations"
-                  className={`text-[13px] font-medium uppercase tracking-widest underline decoration-2 underline-offset-8 transition-colors duration-200 hover:text-accent ${
-                    isActive("/locations")
-                      ? "decoration-accent text-accent"
-                      : "decoration-transparent text-text-primary"
-                  }`}
-                >
-                  Areas
-                </Link>
-                <div className="invisible absolute left-0 top-full z-50 mt-2 max-h-[70vh] w-64 overflow-y-auto border border-border-light bg-white opacity-0 shadow-lg transition-all duration-200 group-hover:visible group-hover:opacity-100">
-                  {areaLinks.map((area) => (
-                    <Link
-                      key={area.href}
-                      href={area.href}
-                      className="block px-6 py-3 text-[13px] text-text-primary transition-colors duration-200 hover:bg-section-alt-bg hover:text-accent"
-                    >
-                      {area.label}
-                    </Link>
-                  ))}
-                  <Link
-                    href="/locations"
-                    className="block border-t border-border-light px-6 py-3 text-[13px] font-medium text-accent hover:bg-section-alt-bg"
-                  >
-                    All neighborhoods &rarr;
-                  </Link>
-                </div>
-              </div>
-            </nav>
-
-            <Link
-              href="/"
-              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center"
-            >
-              <p className="font-heading text-[28px] tracking-widest text-text-primary">XIRLANE</p>
-              <p className="text-[9px] uppercase tracking-[0.3em] text-accent">CLEANING</p>
-            </Link>
-
-            <div className="ml-auto hidden flex-1 justify-end lg:flex">
+          <div className="site-container flex items-center justify-between py-4 lg:py-5">
+            <div className="flex flex-1 items-center justify-start">
               <Link
-                href="/contact"
-                className="bg-button-primary-bg px-6 py-2.5 text-[12px] uppercase tracking-widest text-button-primary-text transition-all duration-300 hover:bg-accent"
+                href="/"
+                className="shrink-0 transition-opacity hover:opacity-80"
+                aria-label="Xirlane Cleaning — Home"
               >
-                BOOK NOW &rarr;
+                <p className="font-heading text-[22px] leading-none tracking-widest text-text-primary lg:text-[26px]">
+                  XIRLANE
+                </p>
+                <p className="mt-0.5 text-[8px] uppercase tracking-[0.3em] text-accent lg:text-[9px]">
+                  CLEANING
+                </p>
               </Link>
             </div>
 
-            <button
-              type="button"
-              className="ml-auto text-text-primary lg:hidden"
-              onClick={() => setMobileOpen((prev) => !prev)}
-              aria-expanded={mobileOpen}
-              aria-controls="mobile-navigation"
-              aria-label="Toggle navigation menu"
-            >
-              {mobileOpen ? <HiXMark size={24} /> : <HiBars3 size={24} />}
-            </button>
+            <nav className="hidden flex-[2] items-center justify-center lg:flex" aria-label="Primary">
+              <ul className="flex items-center justify-center gap-8 xl:gap-12">
+                {centerLinks.map((link) => (
+                  <li key={link.href}>
+                    <Link href={link.href} className={navLinkClass(isActive(link.href))}>
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+
+                <li className="group relative">
+                  <Link href="/services" className={navLinkClass(isActive("/services"))}>
+                    Services
+                  </Link>
+                  <div className="invisible absolute left-1/2 top-full z-50 mt-2 w-64 -translate-x-1/2 border border-border-light bg-white opacity-0 shadow-lg transition-all duration-200 group-hover:visible group-hover:opacity-100">
+                    {serviceLinks.map((service) => (
+                      <Link
+                        key={service.href}
+                        href={service.href}
+                        className="block px-6 py-3 text-[13px] text-text-primary transition-colors duration-200 hover:bg-section-alt-bg hover:text-accent"
+                      >
+                        {service.label}
+                      </Link>
+                    ))}
+                  </div>
+                </li>
+
+                <li className="group relative">
+                  <Link href="/locations" className={navLinkClass(isActive("/locations"))}>
+                    Areas
+                  </Link>
+                  <div className="invisible absolute left-1/2 top-full z-50 mt-2 max-h-[70vh] w-64 -translate-x-1/2 overflow-y-auto border border-border-light bg-white opacity-0 shadow-lg transition-all duration-200 group-hover:visible group-hover:opacity-100">
+                    {areaLinks.map((area) => (
+                      <Link
+                        key={area.href}
+                        href={area.href}
+                        className="block px-6 py-3 text-[13px] text-text-primary transition-colors duration-200 hover:bg-section-alt-bg hover:text-accent"
+                      >
+                        {area.label}
+                      </Link>
+                    ))}
+                    <Link
+                      href="/locations"
+                      className="block border-t border-border-light px-6 py-3 text-[13px] font-medium text-accent hover:bg-section-alt-bg"
+                    >
+                      All neighborhoods &rarr;
+                    </Link>
+                  </div>
+                </li>
+              </ul>
+            </nav>
+
+            {/* Right — BOOK NOW + mobile toggle */}
+            <div className="flex flex-1 items-center justify-end gap-4">
+              <Link
+                href="/contact"
+                className={`${bookNowLinkClass} hidden min-h-11 items-center px-6 py-2.5 text-[12px] uppercase tracking-widest lg:inline-flex`}
+              >
+                <span className="relative z-10">BOOK NOW &rarr;</span>
+              </Link>
+
+              <button
+                type="button"
+                className="text-text-primary lg:hidden"
+                onClick={() => setMobileOpen((prev) => !prev)}
+                aria-expanded={mobileOpen}
+                aria-controls="mobile-navigation"
+                aria-label="Toggle navigation menu"
+              >
+                {mobileOpen ? <HiXMark size={24} /> : <HiBars3 size={24} />}
+              </button>
+            </div>
           </div>
         </div>
 
@@ -196,15 +190,16 @@ export default function Navbar() {
               <Link
                 href="/contact"
                 onClick={() => setMobileOpen(false)}
-                className="block w-full bg-button-primary-bg py-3 text-center text-[12px] uppercase tracking-widest text-button-primary-text transition-all duration-300 hover:bg-accent"
+                className={`${bookNowLinkClass} block w-full py-3 text-center text-[12px] uppercase tracking-widest`}
               >
-                BOOK NOW &rarr;
+                <span className="relative z-10">BOOK NOW &rarr;</span>
               </Link>
             </div>
           </div>
         </div>
       </header>
-      <div className="h-[116px] lg:h-[152px]" aria-hidden="true" />
+      {/* Spacer: announcement bar (36px) + nav row */}
+      <div className="h-[104px] lg:h-[108px]" aria-hidden="true" />
     </>
   );
 }

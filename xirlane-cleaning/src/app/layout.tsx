@@ -4,6 +4,8 @@ import AnnouncementBar from "@/components/layout/AnnouncementBar";
 import CrawlerSiteNav from "@/components/layout/CrawlerSiteNav";
 import Footer from "@/components/layout/Footer";
 import Navbar from "@/components/layout/Navbar";
+import ScrollQuotePopup from "@/components/layout/ScrollQuotePopup";
+import ExitIntentModal from "@/components/layout/ExitIntentModal";
 import { JsonLdGraph } from "@/components/seo/JsonLd";
 import { globalSchemaGraph } from "@/lib/schema";
 import { rootMetadata } from "@/lib/seo";
@@ -50,6 +52,8 @@ export default function RootLayout({
         <Navbar />
         <div id="main-content">{children}</div>
         <Footer />
+        <ScrollQuotePopup />
+        <ExitIntentModal />
       </body>
     </html>
   );

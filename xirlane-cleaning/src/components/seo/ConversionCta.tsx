@@ -170,7 +170,8 @@ export default function ConversionCta({
           <div className="mt-10 flex flex-col items-stretch justify-center gap-4 sm:flex-row sm:items-center sm:gap-5">
             <Button
               href={content.primaryHref}
-              className="w-full bg-accent text-text-primary hover:bg-white hover:text-text-primary sm:w-auto sm:min-w-[220px]"
+              variant="accent"
+              className="w-full sm:w-auto sm:min-w-[220px]"
             >
               {content.primaryLabel}
             </Button>
