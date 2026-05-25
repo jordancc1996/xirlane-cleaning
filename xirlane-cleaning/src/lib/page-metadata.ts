@@ -8,7 +8,7 @@ export const PAGE_SEO = {
     path: "/",
     title: "House Cleaning Philadelphia | Maid & Commercial",
     description:
-      "Insured house cleaning, maid service, deep cleans & move-out cleaning in Philadelphia & 5 PA counties. Weekly, biweekly, or one-time. Get a free quote today.",
+      "Philadelphia's trusted house cleaning & maid service. Insured, eco-friendly crews serving Philadelphia, Montgomery, Delaware, Chester & Bucks County. Get a free quote.",
     keywords: [
       "house cleaning Philadelphia",
       "maid service Philadelphia",
@@ -32,63 +32,24 @@ export const PAGE_SEO = {
     ],
     ogImageAlt: "Philadelphia home and office cleaning services by Xirlane",
   },
-  homeCleaning: {
-    path: "/services/home-cleaning",
-    title: "House Cleaning Philadelphia | Weekly & One-Time",
+  locations: {
+    path: "/locations",
+    title: "Philadelphia Cleaning by Neighborhood | Local Areas",
     description:
-      "Book house cleaning in Philadelphia & nearby counties. Weekly, biweekly, monthly, or one-time maid service. Kitchens, baths & floors done right. Free estimate.",
+      "Find house & apartment cleaning in Philadelphia neighborhoods: Center City, Fishtown, Rittenhouse, University City, Main Line & more. Free quotes from Xirlane Cleaning.",
     keywords: [
-      "maid services Philadelphia",
-      "maid service Philadelphia",
-      "house cleaning Philadelphia",
-      "residential cleaning Philadelphia",
+      "cleaning service Philadelphia neighborhoods",
+      "house cleaning near me Philadelphia",
+      "maid service by neighborhood Philadelphia",
+      "local cleaning company Philadelphia",
     ],
-    ogImageAlt: "Residential house cleaning in Philadelphia",
-  },
-  commercialCleaning: {
-    path: "/services/commercial-cleaning",
-    title: "Commercial Cleaning Philadelphia | Offices",
-    description:
-      "Commercial cleaning in Philadelphia for offices, studios & retail. Restrooms, workspaces & floors on your schedule. Insured & bonded. Request a quote.",
-    keywords: [
-      "commercial cleaning Philadelphia",
-      "office cleaning Philadelphia PA",
-      "janitorial service Philadelphia",
-      "business cleaning near me",
-    ],
-    ogImageAlt: "Commercial office cleaning in Philadelphia",
-  },
-  deepCleaning: {
-    path: "/services/deep-cleaning",
-    title: "Deep Cleaning Philadelphia | Top-to-Bottom",
-    description:
-      "Deep cleaning services in Philadelphia for first visits, spring cleans & seasonal resets. Detailed packages from seasonal to ultimate. Free quote.",
-    keywords: [
-      "deep cleaning services Philadelphia",
-      "spring cleaning Philadelphia PA",
-      "move in deep clean Philadelphia",
-      "intensive house cleaning",
-    ],
-    ogImageAlt: "Deep cleaning service in a Philadelphia home",
-  },
-  postConstruction: {
-    path: "/services/post-construction",
-    title: "Move-Out Cleaning Philadelphia | Post-Build",
-    description:
-      "Move-out cleaning & post-construction cleaning in Philadelphia. Dust, debris & final polish for move-in, staging & handoff. Insured team. Get a quote.",
-    keywords: [
-      "move out cleaning Philadelphia",
-      "post construction cleaning Philadelphia",
-      "renovation cleaning Philadelphia PA",
-      "construction cleanup near me",
-    ],
-    ogImageAlt: "Move-out and post-construction cleaning in Philadelphia",
+    ogImageAlt: "Philadelphia neighborhood cleaning service areas",
   },
   contact: {
     path: "/contact",
     title: "Free Cleaning Quote Philadelphia | Book Now",
     description:
-      "Request a free house or commercial cleaning quote in Philadelphia & surrounding counties. Call, email, or book online. Insured, bonded & satisfaction guaranteed.",
+      "Get a free cleaning quote from Xirlane Cleaning. Serving Philadelphia, Montgomery, Delaware, Chester & Bucks County. Call or email us today.",
     keywords: [
       "free house cleaning quote Philadelphia",
       "commercial cleaning estimate Philadelphia",
@@ -101,7 +62,7 @@ export const PAGE_SEO = {
     path: "/faq",
     title: "Philadelphia Cleaning FAQ | Price & Areas",
     description:
-      "FAQ for Philadelphia cleaning: pricing, service areas, supplies, insurance & scheduling. House, commercial, deep & move-out answers from Xirlane Cleaning.",
+      "Answers to common questions about Xirlane Cleaning's house cleaning, maid service, commercial cleaning, pricing, service areas, and booking in Greater Philadelphia.",
     keywords: [
       "house cleaning cost Philadelphia",
       "cleaning service FAQ Philadelphia",
@@ -114,7 +75,7 @@ export const PAGE_SEO = {
     path: "/gallery",
     title: "Cleaning Photos Philadelphia | House & Commercial Gallery",
     description:
-      "View completed cleaning photos from Xirlane Cleaning: professional house cleaning, deep cleaning service, move-out cleaning & commercial cleaning in Philadelphia, PA.",
+      "See before and after photos of Xirlane Cleaning's residential, commercial, and deep cleaning work across Greater Philadelphia.",
     keywords: [
       "cleaning company gallery Philadelphia",
       "house cleaning before and after Philadelphia",
@@ -126,6 +87,32 @@ export const PAGE_SEO = {
     ogImageAlt:
       "Sparkling clean kitchen after professional house cleaning in Philadelphia by Xirlane Cleaning",
     ogImage: "/images/gallery/sparkling-clean-kitchen-philadelphia.jpg",
+  },
+  serviceAreas: {
+    path: "/service-areas",
+    title: "Cleaning Service Areas Philadelphia | 5 Counties",
+    description:
+      "Xirlane Cleaning serves Philadelphia, Montgomery, Delaware, Chester & Bucks counties. Maid service, deep cleaning, commercial & move-out cleaning. Free quotes.",
+    keywords: [
+      "cleaning services Philadelphia",
+      "maid service Philadelphia area",
+      "house cleaning near me Philadelphia",
+      "commercial cleaning Montgomery County",
+    ],
+    ogImageAlt: "Greater Philadelphia cleaning service areas",
+  },
+  blog: {
+    path: "/blog",
+    title: "Philadelphia Cleaning Tips & Guides | Blog",
+    description:
+      "Cleaning tips, checklists, and local guides for Philadelphia homeowners and businesses from Xirlane Cleaning. House, commercial, and deep cleaning advice.",
+    keywords: [
+      "house cleaning tips Philadelphia",
+      "maid service advice",
+      "deep cleaning checklist",
+      "commercial cleaning tips Philadelphia",
+    ],
+    ogImageAlt: "Xirlane Cleaning blog — Philadelphia cleaning guides",
   },
 } as const;
 

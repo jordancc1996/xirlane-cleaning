@@ -32,8 +32,19 @@ export default function Hero() {
           <p className="mt-6 max-w-lg text-base text-text-body">
             Xirlane Cleaning provides residential cleaning, commercial cleaning, and
             deep cleaning services in Philadelphia and surrounding counties. Whether you
-            need a recurring maid service near you, a one-time reset, or move-out cleaning
-            before a transition, our insured team delivers consistent results.
+            need a{" "}
+            <Link href="/services/house-cleaning" className="text-accent hover:underline">
+              recurring maid service near you
+            </Link>
+            , a{" "}
+            <Link href="/services/house-cleaning" className="text-accent hover:underline">
+              one-time reset
+            </Link>
+            , or move-out cleaning before a transition, our insured team delivers{" "}
+            <Link href="/gallery" className="text-accent hover:underline">
+              consistent results
+            </Link>
+            .
           </p>
 
           <div className="mt-10 flex flex-wrap gap-4">
@@ -67,7 +78,7 @@ export default function Hero() {
               src={HERO_IMAGE}
               alt="Professional house cleaning team in a Philadelphia home kitchen"
               sizes={IMAGE_SIZES.hero}
-              priority
+              priority={true}
             />
             <div
               className="pointer-events-none absolute -right-4 -bottom-4 h-full w-full border-2 border-accent"

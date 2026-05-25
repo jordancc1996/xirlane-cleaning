@@ -26,8 +26,11 @@ const steps = [
 
 export default function HowItWorks() {
   return (
-    <section className="bg-section-alt-bg py-16 md:py-20" aria-labelledby="how-it-works-heading">
-      <div className="site-container">
+    <section
+      className="overflow-x-hidden bg-section-alt-bg px-4 py-16 sm:px-6 md:px-8 md:py-20"
+      aria-labelledby="how-it-works-heading"
+    >
+      <div className="site-container px-0">
         <div className="mx-auto max-w-3xl text-center">
           <EyebrowLabel>THE PROCESS</EyebrowLabel>
           <h2 id="how-it-works-heading" className="mt-4 text-h2-mobile text-text-primary md:text-h2">
@@ -39,30 +42,37 @@ export default function HowItWorks() {
           </p>
         </div>
 
-        <div className="relative mt-8">
+        <div className="relative mt-8 w-full max-w-full min-w-0">
           <div className="pointer-events-none absolute left-0 right-0 top-10 hidden border-t border-dotted border-accent lg:block" />
-          <div className="grid gap-8 lg:grid-cols-3">
+          <div className="grid w-full min-w-0 grid-cols-1 gap-10 lg:grid-cols-3 lg:gap-8">
             {steps.map((step, index) => (
-              <article key={step.title} className="relative text-center">
+              <article
+                key={step.title}
+                className="relative box-border min-w-0 overflow-x-clip px-4 text-center"
+              >
                 <div className="mx-auto mb-2 flex h-10 w-10 items-center justify-center border border-border-light bg-white text-text-primary">
                   <step.Icon size={20} aria-hidden="true" />
                 </div>
-                <p
-                  className="pointer-events-none absolute left-1/2 top-7 -translate-x-1/2 font-heading text-[72px] font-light leading-none text-border-light"
-                  aria-hidden="true"
-                >
-                  {index + 1}
-                </p>
-                <h3 className="relative mt-10 text-[16px] font-medium uppercase tracking-wide text-text-primary">
-                  {step.title}
-                </h3>
-                <p className="relative mt-2 text-[14px] leading-snug text-text-body">{step.description}</p>
+                <div className="relative px-1 sm:px-0">
+                  <p
+                    className="pointer-events-none absolute inset-x-0 top-0 z-0 text-center font-heading text-[72px] font-light leading-none text-border-light"
+                    aria-hidden="true"
+                  >
+                    {index + 1}
+                  </p>
+                  <h3 className="relative z-10 break-words pt-8 text-[16px] font-medium uppercase tracking-wide text-text-primary">
+                    {step.title}
+                  </h3>
+                  <p className="relative z-10 mt-2 break-words text-[14px] leading-snug text-text-body">
+                    {step.description}
+                  </p>
+                </div>
               </article>
             ))}
           </div>
         </div>
 
-        <div className="mt-8 text-center">
+        <div className="py-12 text-center md:py-16">
           <Button href="/contact">BOOK YOUR FIRST CLEAN &rarr;</Button>
           <p className="mt-4 text-[13px] text-text-body">
             Questions about pricing or service areas? See our{" "}

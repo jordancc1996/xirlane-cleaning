@@ -10,7 +10,7 @@ const cards = [
     headline: "We do the cleaning, you make the memories",
     body: "Recurring and one-time residential cleaning — weekly, biweekly, monthly, or on demand.",
     image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1400&q=80",
-    link: "/services/home-cleaning",
+    link: "/services/house-cleaning",
     imageAlt: "House cleaning service in a Philadelphia living room",
   },
   {
@@ -28,7 +28,7 @@ const cards = [
     headline: "Let our crew make your work shine",
     body: "Move-out, post-construction, and renovation cleaning for move-in ready results.",
     image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1400&q=80",
-    link: "/services/post-construction",
+    link: "/services/move-out-cleaning",
     imageAlt: "Move-out and post-construction cleaning crew",
   },
   {
@@ -71,6 +71,9 @@ export default function ServiceCards() {
                 src={card.image}
                 alt={card.imageAlt}
                 sizes={IMAGE_SIZES.card}
+                priority={false}
+                loading="lazy"
+                fetchPriority="low"
                 className="object-cover transition-transform duration-[400ms] ease-out group-hover:scale-[1.03]"
               />
               <div className="absolute inset-0 bg-black/45 transition-colors duration-[400ms] group-hover:bg-black/55" />

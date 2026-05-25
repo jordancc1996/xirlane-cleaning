@@ -58,6 +58,12 @@ type FillImageProps = {
   fetchPriority?: ImageProps["fetchPriority"];
 };
 
+function maxWidthFromSizes(sizes: string): number {
+  const matches = sizes.match(/(\d+)px/g);
+  if (!matches?.length) return 1200;
+  return Math.max(...matches.map((m) => Number.parseInt(m, 10)));
+}
+
 /** For absolutely positioned cover images inside a sized parent. */
 export function OptimizedFillImage({
   src,
@@ -70,7 +76,7 @@ export function OptimizedFillImage({
   fetchPriority,
 }: FillImageProps) {
   const optimizedSrc = src.includes("images.unsplash.com")
-    ? optimizeUnsplashUrl(src, 1600)
+    ? optimizeUnsplashUrl(src, maxWidthFromSizes(sizes))
     : src;
 
   return (

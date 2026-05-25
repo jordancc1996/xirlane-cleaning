@@ -1,28 +1,28 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import FaqPreviewSection from "@/components/seo/FaqPreviewSection";
 import PageKnowledgeBlock from "@/components/seo/PageKnowledgeBlock";
+import QuoteCtaBand from "@/components/seo/QuoteCtaBand";
 import { JsonLdGraph } from "@/components/seo/JsonLd";
 import { PAGE_KNOWLEDGE } from "@/lib/ai-page-knowledge";
 import LocalTrustSignals from "@/components/local/LocalTrustSignals";
 import NapBlock from "@/components/local/NapBlock";
 import ServiceAreaSection from "@/components/local/ServiceAreaSection";
+import { LOCATION_NAV_LINKS } from "@/lib/location-landing-pages";
 import { LOCAL_SERVICES } from "@/lib/local-services";
+import { PAGE_SEO } from "@/lib/page-metadata";
 import { createPageMetadata } from "@/lib/seo";
 import { breadcrumbSchema, serviceAreasPageSchema } from "@/lib/schema";
 import { BUSINESS } from "@/lib/site";
 
+const meta = PAGE_SEO.serviceAreas;
+
 export const metadata: Metadata = createPageMetadata({
-  title: "Cleaning Service Areas Philadelphia | 5 Counties",
-  description:
-    "Xirlane Cleaning serves Philadelphia, Montgomery, Delaware, Chester & Bucks counties. Maid service, deep cleaning, commercial & move-out cleaning. Free quotes.",
-  path: "/service-areas",
-  keywords: [
-    "cleaning services Philadelphia",
-    "maid service Philadelphia area",
-    "house cleaning near me Philadelphia",
-    "commercial cleaning Montgomery County",
-  ],
-  ogImageAlt: "Greater Philadelphia cleaning service areas map",
+  title: meta.title,
+  description: meta.description,
+  path: meta.path,
+  keywords: [...meta.keywords],
+  ogImageAlt: meta.ogImageAlt,
 });
 
 export default function ServiceAreasPage() {
@@ -37,8 +37,6 @@ export default function ServiceAreasPage() {
           serviceAreasPageSchema(),
         ]}
       />
-      <PageKnowledgeBlock knowledge={PAGE_KNOWLEDGE.serviceAreas} />
-
       <section className="section-spacing">
         <div className="site-container max-w-3xl">
           <p className="text-[11px] uppercase tracking-eyebrow text-accent">SERVICE AREAS</p>
@@ -55,6 +53,38 @@ export default function ServiceAreasPage() {
 
       <LocalTrustSignals />
 
+      <section className="section-spacing">
+        <div className="site-container max-w-3xl">
+          <h2 className="text-h2-mobile text-text-primary md:text-h2">
+            Philadelphia neighborhood cleaning pages
+          </h2>
+          <p className="mt-4 text-text-body">
+            Localized pages describe property types, services, and booking details for popular
+            areas. Each page links to relevant house, apartment, and commercial cleaning services.
+          </p>
+          <ul className="mt-8 grid gap-4 sm:grid-cols-2">
+            {LOCATION_NAV_LINKS.map((loc) => (
+              <li key={loc.href}>
+                <Link
+                  href={loc.href}
+                  className="block border border-border-light bg-white p-5 hover:border-accent"
+                >
+                  <span className="text-[15px] font-medium text-text-primary">{loc.label}</span>
+                  <span className="mt-2 block text-[12px] uppercase tracking-widest text-text-body/70">
+                    Local cleaning page &rarr;
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-6 text-[14px] text-text-body">
+            <Link href="/locations" className="text-accent hover:underline">
+              Browse all neighborhood pages
+            </Link>
+          </p>
+        </div>
+      </section>
+
       <section className="section-spacing bg-section-alt-bg">
         <div className="site-container max-w-3xl">
           <h2 className="text-h2-mobile text-text-primary md:text-h2">
@@ -65,7 +95,9 @@ export default function ServiceAreasPage() {
             what is included and request a quote.
           </p>
           <ul className="mt-8 space-y-6">
-            {Object.entries(LOCAL_SERVICES).map(([key, service]) => (
+            {Object.entries(LOCAL_SERVICES)
+              .filter(([key]) => key !== "cleaningServices")
+              .map(([key, service]) => (
               <li key={key} className="border border-border-light bg-white p-6">
                 <h3 className="text-h3-mobile text-text-primary md:text-h3">
                   <Link href={service.path} className="hover:text-accent">
@@ -108,6 +140,20 @@ export default function ServiceAreasPage() {
           </p>
         </div>
       </section>
+
+      <PageKnowledgeBlock knowledge={PAGE_KNOWLEDGE.serviceAreas} />
+
+      <FaqPreviewSection
+        setKey="serviceAreas"
+        heading="Service Area FAQ"
+        intro="Questions about where we clean, maid service coverage, and getting a quote in the Philadelphia metro."
+        ctaPreset="freeQuote"
+      />
+      <QuoteCtaBand
+        preset="bookCleaning"
+        heading="Request Cleaning in Your Neighborhood"
+        body="We serve Philadelphia and Montgomery, Delaware, Chester, and Bucks counties with house, commercial, and deep cleaning."
+      />
     </main>
   );
 }

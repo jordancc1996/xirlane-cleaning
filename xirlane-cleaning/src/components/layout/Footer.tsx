@@ -1,5 +1,8 @@
 import Link from "next/link";
 import NapBlock from "@/components/local/NapBlock";
+import { BLOG_CATEGORY_LIST, categoryUrl } from "@/lib/blog-categories";
+import { LOCATION_NAV_LINKS } from "@/lib/location-landing-pages";
+import { LANDING_NAV_LINKS } from "@/lib/seo-landing-pages";
 import { BUSINESS } from "@/lib/site";
 
 export default function Footer() {
@@ -7,8 +10,8 @@ export default function Footer() {
 
   return (
     <footer className="border-t border-border-light bg-section-alt-bg pt-14">
-      <div className="site-container grid gap-10 pb-12 sm:grid-cols-2 lg:grid-cols-4">
-        <div>
+      <div className="site-container grid gap-10 pb-12 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+        <div className="sm:col-span-2 lg:col-span-1">
           <p className="font-heading text-3xl text-text-primary">XIRLANE</p>
           <p className="mt-2 text-[13px] text-text-body/80">
             Philadelphia&apos;s Premium Cleaning Service
@@ -18,36 +21,63 @@ export default function Footer() {
           </div>
         </div>
 
-        <nav aria-label="Services">
+        <nav aria-label="Cleaning services">
           <p className="mb-4 text-[11px] uppercase tracking-widest text-accent">SERVICES</p>
           <div className="space-y-2 text-[13px] text-text-body/80">
-            <Link href="/services/home-cleaning" className="block transition-colors hover:text-accent">
-              Maid &amp; House Cleaning
-            </Link>
-            <Link href="/services/commercial-cleaning" className="block transition-colors hover:text-accent">
-              Commercial Cleaning
-            </Link>
-            <Link href="/services/post-construction" className="block transition-colors hover:text-accent">
-              Move-Out Cleaning
-            </Link>
-            <Link href="/services/deep-cleaning" className="block transition-colors hover:text-accent">
-              Deep Cleaning
-            </Link>
+            {LANDING_NAV_LINKS.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="block transition-colors hover:text-accent"
+              >
+                {link.label}
+              </Link>
+            ))}
             <Link href="/services" className="block transition-colors hover:text-accent">
-              All Services
+              All services
             </Link>
           </div>
         </nav>
 
-        <nav aria-label="Company">
-          <p className="mb-4 text-[11px] uppercase tracking-widest text-accent">COMPANY</p>
+        <nav aria-label="Philadelphia neighborhoods">
+          <p className="mb-4 text-[11px] uppercase tracking-widest text-accent">NEIGHBORHOODS</p>
+          <div className="space-y-2 text-[13px] text-text-body/80">
+            {LOCATION_NAV_LINKS.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="block transition-colors hover:text-accent"
+              >
+                {link.label}
+              </Link>
+            ))}
+            <Link href="/locations" className="block transition-colors hover:text-accent">
+              All neighborhoods
+            </Link>
+            <Link href="/service-areas" className="block transition-colors hover:text-accent">
+              County service areas
+            </Link>
+          </div>
+        </nav>
+
+        <nav aria-label="Resources">
+          <p className="mb-4 text-[11px] uppercase tracking-widest text-accent">RESOURCES</p>
           <div className="space-y-2 text-[13px] text-text-body/80">
             <Link href="/" className="block transition-colors hover:text-accent">
               Home
             </Link>
-            <Link href="/service-areas" className="block transition-colors hover:text-accent">
-              Service Areas
+            <Link href="/blog" className="block transition-colors hover:text-accent">
+              Blog
             </Link>
+            {BLOG_CATEGORY_LIST.map((cat) => (
+              <Link
+                key={cat.slug}
+                href={categoryUrl(cat.slug)}
+                className="block transition-colors hover:text-accent"
+              >
+                {cat.name}
+              </Link>
+            ))}
             <Link href="/gallery" className="block transition-colors hover:text-accent">
               Gallery
             </Link>
@@ -55,7 +85,7 @@ export default function Footer() {
               FAQ
             </Link>
             <Link href="/contact" className="block transition-colors hover:text-accent">
-              Contact &amp; Quote
+              Contact &amp; quote
             </Link>
           </div>
         </nav>
@@ -81,20 +111,8 @@ export default function Footer() {
             &copy; {year} {BUSINESS.name}. All rights reserved.
           </p>
           <p>
-            <Link href="/contact" className="hover:text-accent">
+            <Link href="/contact" className="text-accent hover:underline">
               Get a free quote
-            </Link>
-            {" · "}
-            <Link href="/service-areas" className="hover:text-accent">
-              Service areas
-            </Link>
-            {" · "}
-            <Link href="/faq" className="hover:text-accent">
-              FAQ
-            </Link>
-            {" · "}
-            <Link href="/llms.txt" className="hover:text-accent">
-              Site summary (llms.txt)
             </Link>
           </p>
         </div>

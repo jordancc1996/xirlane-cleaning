@@ -16,7 +16,7 @@ export default function PageKnowledgeBlock({ knowledge }: PageKnowledgeBlockProp
       aria-labelledby="page-knowledge-heading"
     >
       <div className="site-container max-w-3xl">
-        <h2 id="page-knowledge-heading" className="text-h3-mobile text-text-primary md:text-h3">
+        <h2 id="page-knowledge-heading" className="text-h2-mobile text-text-primary md:text-h2">
           {knowledge.heading}
         </h2>
         <p className="mt-4 text-[15px] leading-relaxed text-text-body">{knowledge.summary}</p>

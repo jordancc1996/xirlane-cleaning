@@ -37,7 +37,7 @@ export const PAGE_KNOWLEDGE: Record<string, PageKnowledge> = {
   },
   services: {
     heading: "Cleaning services in Philadelphia",
-    summary: `${BUSINESS.name} provides four main cleaning services in Greater Philadelphia: house cleaning and maid service, commercial office cleaning, deep cleaning, and move-out / post-construction cleaning. Each service is available for one-time or recurring scheduling.`,
+    summary: `${BUSINESS.name} provides house cleaning, deep cleaning, move-in and move-out cleaning, apartment cleaning, commercial and office cleaning, recurring plans, Airbnb turnovers, and post-construction cleaning in Greater Philadelphia. Each service is available for one-time or recurring scheduling.`,
     facts: [
       { label: "Service region", value: AREA_LIST },
       { label: "Booking", value: `Quotes at ${SITE_URL}/contact` },
@@ -77,7 +77,10 @@ export const PAGE_KNOWLEDGE: Record<string, PageKnowledge> = {
         value: BUSINESS.philadelphiaNeighborhoods.join(", "),
       },
     ],
-    relatedLinks: SERVICE_LINKS,
+    relatedLinks: [
+      { href: "/locations", label: "Neighborhood pages" },
+      ...SERVICE_LINKS,
+    ],
   },
   gallery: {
     heading: "Xirlane Cleaning photo gallery",
@@ -92,10 +95,25 @@ export const PAGE_KNOWLEDGE: Record<string, PageKnowledge> = {
     ],
     relatedLinks: [
       { href: "/contact", label: "Book a cleaning" },
-      { href: "/services/home-cleaning", label: "House cleaning" },
+      { href: "/services/house-cleaning", label: "House cleaning" },
       { href: "/services/commercial-cleaning", label: "Commercial cleaning" },
       { href: "/services/deep-cleaning", label: "Deep cleaning" },
-      { href: "/services/post-construction", label: "Move-out cleaning" },
+      { href: "/services/move-out-cleaning", label: "Move-out cleaning" },
+      { href: "/services/post-construction-cleaning", label: "Post-construction cleaning" },
+    ],
+  },
+  blog: {
+    heading: "Cleaning tips for Philadelphia",
+    summary: `${BUSINESS.name} publishes practical cleaning guides for Philadelphia-area homeowners and businesses. Categories include deep cleaning, move-out cleaning, apartment cleaning, commercial cleaning, local Philadelphia guides, cleaning tips, and Airbnb turnovers across ${AREA_LIST}.`,
+    facts: [
+      { label: "Service region", value: AREA_LIST },
+      { label: "Blog URL", value: `${SITE_URL}/blog` },
+    ],
+    relatedLinks: [
+      ...SERVICE_LINKS,
+      { href: "/locations", label: "Neighborhood pages" },
+      { href: "/faq", label: "FAQ" },
+      { href: "/contact", label: "Free quote" },
     ],
   },
 };

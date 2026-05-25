@@ -51,14 +51,27 @@ export const BUSINESS = {
 } as const;
 
 export const SERVICE_ROUTES = [
-  { path: "/services/home-cleaning", name: "Home Cleaning", slug: "home-cleaning" },
-  { path: "/services/commercial-cleaning", name: "Commercial Cleaning", slug: "commercial-cleaning" },
-  { path: "/services/post-construction", name: "Post-Construction Cleaning", slug: "post-construction" },
+  { path: "/services/house-cleaning", name: "House Cleaning", slug: "house-cleaning" },
   { path: "/services/deep-cleaning", name: "Deep Cleaning", slug: "deep-cleaning" },
+  { path: "/services/move-out-cleaning", name: "Move-Out Cleaning", slug: "move-out-cleaning" },
+  { path: "/services/move-in-cleaning", name: "Move-In Cleaning", slug: "move-in-cleaning" },
+  { path: "/services/apartment-cleaning", name: "Apartment Cleaning", slug: "apartment-cleaning" },
+  { path: "/services/commercial-cleaning", name: "Commercial Cleaning", slug: "commercial-cleaning" },
+  { path: "/services/office-cleaning", name: "Office Cleaning", slug: "office-cleaning" },
+  { path: "/services/recurring-cleaning", name: "Recurring Cleaning", slug: "recurring-cleaning" },
+  { path: "/services/airbnb-cleaning", name: "Airbnb Cleaning", slug: "airbnb-cleaning" },
+  {
+    path: "/services/post-construction-cleaning",
+    name: "Post-Construction Cleaning",
+    slug: "post-construction-cleaning",
+  },
 ] as const;
 
-export const DEFAULT_OG_IMAGE =
-  "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=1200&h=630&fit=crop";
+/** First-party OG image (1200×630 recommended). */
+export const DEFAULT_OG_IMAGE = "/images/gallery/sparkling-clean-kitchen-philadelphia.jpg";
+
+/** ISO date for static pages in sitemap (update when site content changes). */
+export const SITE_CONTENT_UPDATED = "2025-05-01";
 
 /** Public profiles — add GBP URL above to sync with Google. */
 export function getBusinessSameAs(): string[] {

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { LOCATION_NAV_LINKS } from "@/lib/location-landing-pages";
 import { LOCAL_SERVICES } from "@/lib/local-services";
 import { BUSINESS } from "@/lib/site";
 
@@ -18,7 +19,7 @@ export default function HomeServiceAreas() {
             cleaning services in Philadelphia
           </Link>{" "}
           for homes and businesses. Book{" "}
-          <Link href="/services/home-cleaning" className="text-accent hover:underline">
+          <Link href="/services/house-cleaning" className="text-accent hover:underline">
             maid service
           </Link>
           ,{" "}
@@ -30,7 +31,7 @@ export default function HomeServiceAreas() {
             commercial cleaning
           </Link>
           , or{" "}
-          <Link href="/services/post-construction" className="text-accent hover:underline">
+          <Link href="/services/move-out-cleaning" className="text-accent hover:underline">
             move-out cleaning
           </Link>{" "}
           with flexible one-time or recurring visits.
@@ -48,20 +49,37 @@ export default function HomeServiceAreas() {
           ))}
         </ul>
 
-        <h3 className="mt-8 text-h3-mobile text-text-primary md:text-h3">Local services</h3>
+        <h3 className="mt-8 text-h3-mobile text-text-primary md:text-h3">Philadelphia neighborhoods</h3>
         <ul className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-[14px]">
-          {Object.values(LOCAL_SERVICES).map((service) => (
-            <li key={service.path}>
-              <Link href={service.path} className="text-text-primary hover:text-accent">
-                {service.localName}
+          {LOCATION_NAV_LINKS.map((loc) => (
+            <li key={loc.href}>
+              <Link href={loc.href} className="text-text-primary hover:text-accent">
+                {loc.label}
               </Link>
             </li>
           ))}
         </ul>
 
+        <h3 className="mt-8 text-h3-mobile text-text-primary md:text-h3">Cleaning services</h3>
+        <ul className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-[14px]">
+          {Object.values(LOCAL_SERVICES)
+            .filter((service) => service.path !== "/services")
+            .map((service) => (
+              <li key={service.path}>
+                <Link href={service.path} className="text-text-primary hover:text-accent">
+                  {service.localName}
+                </Link>
+              </li>
+            ))}
+        </ul>
+
         <p className="mt-8 text-[14px] text-text-body">
+          <Link href="/locations" className="text-accent hover:underline">
+            All neighborhood pages
+          </Link>
+          {" · "}
           <Link href="/service-areas" className="text-accent hover:underline">
-            See all service areas
+            County service areas
           </Link>
           {" · "}
           <Link href="/contact" className="text-accent hover:underline">

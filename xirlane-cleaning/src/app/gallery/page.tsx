@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import GalleryCta from "@/components/gallery/GalleryCta";
+import ConversionCta from "@/components/seo/ConversionCta";
+import FaqPreviewSection from "@/components/seo/FaqPreviewSection";
+import SiteHubLinks from "@/components/seo/SiteHubLinks";
 import GalleryHero from "@/components/gallery/GalleryHero";
 import GalleryLightboxHost from "@/components/gallery/GalleryLightboxHost";
 import GalleryPageSections from "@/components/gallery/GalleryPageSections";
@@ -47,6 +50,19 @@ export default function GalleryPage() {
       <GalleryHero />
       <PageKnowledgeBlock knowledge={PAGE_KNOWLEDGE.gallery} />
       <GalleryPageSections />
+      <ConversionCta
+        preset="gallery"
+        variant="compact"
+        className="bg-background"
+        id="gallery-mid-cta"
+      />
+      <FaqPreviewSection
+        setKey="gallery"
+        heading="Gallery & Cleaning FAQ"
+        intro="Questions about the types of cleaning work shown and how to book similar service in Greater Philadelphia."
+        className="bg-section-alt-bg py-16 md:py-20"
+      />
+      <SiteHubLinks heading="Book cleaning like what you see" />
       <GalleryCta />
       <GalleryLightboxHost />
     </main>

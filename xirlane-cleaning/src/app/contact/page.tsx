@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Button from "@/components/ui/Button";
+import FaqPreviewSection from "@/components/seo/FaqPreviewSection";
+import QuoteCtaBand from "@/components/seo/QuoteCtaBand";
+import SiteHubLinks from "@/components/seo/SiteHubLinks";
 import PageKnowledgeBlock from "@/components/seo/PageKnowledgeBlock";
 import { JsonLdGraph } from "@/components/seo/JsonLd";
 import { PAGE_KNOWLEDGE } from "@/lib/ai-page-knowledge";
@@ -32,7 +35,6 @@ export default function ContactPage() {
           contactPageSchema(),
         ]}
       />
-      <PageKnowledgeBlock knowledge={PAGE_KNOWLEDGE.contact} />
       <div className="site-container">
         <p className="text-[11px] uppercase tracking-eyebrow text-accent">CONTACT</p>
         <h1 className="mt-4 text-h1-mobile md:text-h1">Get Your Free Cleaning Quote</h1>
@@ -83,7 +85,7 @@ export default function ContactPage() {
             </div>
             <p className="mt-6 text-[13px] text-text-body/80">
               Explore services:{" "}
-              <Link href="/services/home-cleaning" className="text-accent hover:underline">
+              <Link href="/services/house-cleaning" className="text-accent hover:underline">
                 Home Cleaning
               </Link>
               ,{" "}
@@ -102,7 +104,7 @@ export default function ContactPage() {
               </Link>
               ,{" "}
               <Link
-                href="/services/post-construction"
+                href="/services/post-construction-cleaning"
                 className="text-accent hover:underline"
               >
                 Post-Construction
@@ -112,6 +114,20 @@ export default function ContactPage() {
           </section>
         </div>
       </div>
+      <FaqPreviewSection
+        setKey="contact"
+        heading="Before You Request a Quote"
+        intro="Common questions about pricing, supplies, insurance, and how we schedule cleans in Greater Philadelphia."
+        className="bg-section-alt-bg py-16 md:py-20"
+        ctaPreset="contact"
+      />
+      <PageKnowledgeBlock knowledge={PAGE_KNOWLEDGE.contact} />
+      <SiteHubLinks heading="Explore services and neighborhoods" />
+      <QuoteCtaBand
+        preset="freeQuote"
+        heading="Request Your Free Cleaning Quote"
+        body="Share your address, property type, and preferred schedule. We serve Philadelphia and Montgomery, Delaware, Chester, and Bucks counties."
+      />
     </main>
   );
 }

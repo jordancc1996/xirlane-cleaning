@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import PageKnowledgeBlock from "@/components/seo/PageKnowledgeBlock";
+import FaqPreviewSection from "@/components/seo/FaqPreviewSection";
 import { JsonLdGraph } from "@/components/seo/JsonLd";
 import { PAGE_KNOWLEDGE } from "@/lib/ai-page-knowledge";
 import { PAGE_SEO } from "@/lib/page-metadata";
-import { breadcrumbSchema, webPageSchema } from "@/lib/schema";
+import { breadcrumbSchema, servicesItemListSchema, webPageSchema } from "@/lib/schema";
 import { createPageMetadata } from "@/lib/seo";
 import ServiceAreaSection from "@/components/local/ServiceAreaSection";
 import ServicesPageContent from "./ServicesPageContent";
@@ -32,10 +32,17 @@ export default function ServicesPage() {
             name: meta.title,
             description: meta.description,
           }),
+          servicesItemListSchema(),
         ]}
       />
-      <PageKnowledgeBlock knowledge={PAGE_KNOWLEDGE.services} />
-      <ServicesPageContent />
+      <ServicesPageContent knowledge={PAGE_KNOWLEDGE.services} />
+      <FaqPreviewSection
+        setKey="servicesHub"
+        heading="Cleaning Services FAQ"
+        intro="Compare house, commercial, deep, and move-out cleaning options for Philadelphia and surrounding counties."
+        className="bg-section-alt-bg py-16 md:py-20"
+        ctaPreset="faqFollowUp"
+      />
       <ServiceAreaSection highlight="cleaningServices" />
     </>
   );

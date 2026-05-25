@@ -4,25 +4,25 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { HiBars3, HiXMark } from "react-icons/hi2";
+import { LOCATION_NAV_LINKS } from "@/lib/location-landing-pages";
+import { LANDING_NAV_LINKS } from "@/lib/seo-landing-pages";
 
 const primaryLinks = [
   { href: "/", label: "Home" },
+  { href: "/blog", label: "Blog" },
   { href: "/gallery", label: "Gallery" },
   { href: "/faq", label: "FAQ" },
-  { href: "/contact", label: "Contact" },
 ];
 
-const serviceLinks = [
-  { href: "/services/home-cleaning", label: "Home Cleaning" },
-  { href: "/services/commercial-cleaning", label: "Commercial Cleaning" },
-  { href: "/services/post-construction", label: "Post-Construction" },
-  { href: "/services/deep-cleaning", label: "Deep Cleaning" },
-];
+const serviceLinks = LANDING_NAV_LINKS;
+const areaLinks = LOCATION_NAV_LINKS;
 
 const mobileLinks = [
   { href: "/", label: "Home" },
   { href: "/services", label: "Services" },
-  ...serviceLinks,
+  { href: "/locations", label: "Neighborhoods" },
+  { href: "/blog", label: "Blog" },
+  { href: "/service-areas", label: "Service areas" },
   { href: "/gallery", label: "Gallery" },
   { href: "/faq", label: "FAQ" },
   { href: "/contact", label: "Contact" },
@@ -35,6 +35,8 @@ export default function Navbar() {
 
   const isActive = (href: string) => {
     if (href === "/services") return pathname.startsWith("/services");
+    if (href === "/locations") return pathname.startsWith("/locations");
+    if (href === "/blog") return pathname.startsWith("/blog");
     return pathname === href;
   };
 
@@ -59,22 +61,22 @@ export default function Navbar() {
         </div>
 
         <div
-          className={`h-20 transition-all duration-300 ease-in-out ${
+          className={`transition-all duration-300 ease-in-out ${
             isScrolled
               ? "border-b border-border-light bg-nav-bg-solid shadow-[0_8px_24px_rgba(0,0,0,0.08)]"
               : "border-b border-transparent bg-nav-bg-transparent shadow-none"
           }`}
         >
-          <div className="site-container grid h-full grid-cols-[1fr_auto_1fr] items-center">
-            <nav className="hidden items-center gap-8 lg:flex" aria-label="Primary">
+          <div className="site-container relative flex items-center py-4 lg:py-5">
+            <nav className="hidden flex-1 items-center gap-8 lg:flex" aria-label="Primary">
               {primaryLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`border-b-2 pb-1 text-[13px] font-medium uppercase tracking-widest transition-colors duration-200 hover:text-accent ${
+                  className={`text-[13px] font-medium uppercase tracking-widest underline decoration-2 underline-offset-8 transition-colors duration-200 hover:text-accent ${
                     isActive(link.href)
-                      ? "border-accent text-accent"
-                      : "border-transparent text-text-primary"
+                      ? "decoration-accent text-accent"
+                      : "decoration-transparent text-text-primary"
                   }`}
                 >
                   {link.label}
@@ -84,10 +86,10 @@ export default function Navbar() {
               <div className="group relative">
                 <Link
                   href="/services"
-                  className={`border-b-2 pb-1 text-[13px] font-medium uppercase tracking-widest transition-colors duration-200 hover:text-accent ${
+                  className={`text-[13px] font-medium uppercase tracking-widest underline decoration-2 underline-offset-8 transition-colors duration-200 hover:text-accent ${
                     isActive("/services")
-                      ? "border-accent text-accent"
-                      : "border-transparent text-text-primary"
+                      ? "decoration-accent text-accent"
+                      : "decoration-transparent text-text-primary"
                   }`}
                 >
                   Services
@@ -104,14 +106,47 @@ export default function Navbar() {
                   ))}
                 </div>
               </div>
+
+              <div className="group relative">
+                <Link
+                  href="/locations"
+                  className={`text-[13px] font-medium uppercase tracking-widest underline decoration-2 underline-offset-8 transition-colors duration-200 hover:text-accent ${
+                    isActive("/locations")
+                      ? "decoration-accent text-accent"
+                      : "decoration-transparent text-text-primary"
+                  }`}
+                >
+                  Areas
+                </Link>
+                <div className="invisible absolute left-0 top-full z-50 mt-2 max-h-[70vh] w-64 overflow-y-auto border border-border-light bg-white opacity-0 shadow-lg transition-all duration-200 group-hover:visible group-hover:opacity-100">
+                  {areaLinks.map((area) => (
+                    <Link
+                      key={area.href}
+                      href={area.href}
+                      className="block px-6 py-3 text-[13px] text-text-primary transition-colors duration-200 hover:bg-section-alt-bg hover:text-accent"
+                    >
+                      {area.label}
+                    </Link>
+                  ))}
+                  <Link
+                    href="/locations"
+                    className="block border-t border-border-light px-6 py-3 text-[13px] font-medium text-accent hover:bg-section-alt-bg"
+                  >
+                    All neighborhoods &rarr;
+                  </Link>
+                </div>
+              </div>
             </nav>
 
-            <Link href="/" className="text-center">
+            <Link
+              href="/"
+              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center"
+            >
               <p className="font-heading text-[28px] tracking-widest text-text-primary">XIRLANE</p>
               <p className="text-[9px] uppercase tracking-[0.3em] text-accent">CLEANING</p>
             </Link>
 
-            <div className="hidden justify-end lg:flex">
+            <div className="ml-auto hidden flex-1 justify-end lg:flex">
               <Link
                 href="/contact"
                 className="bg-button-primary-bg px-6 py-2.5 text-[12px] uppercase tracking-widest text-button-primary-text transition-all duration-300 hover:bg-accent"
@@ -122,7 +157,7 @@ export default function Navbar() {
 
             <button
               type="button"
-              className="justify-self-end text-text-primary lg:hidden"
+              className="ml-auto text-text-primary lg:hidden"
               onClick={() => setMobileOpen((prev) => !prev)}
               aria-expanded={mobileOpen}
               aria-controls="mobile-navigation"

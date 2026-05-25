@@ -26,20 +26,20 @@ export default function SeeOurWork() {
         </div>
 
         <ul
-          className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:mt-12 lg:grid-cols-3 lg:gap-6"
+          className="mt-10 grid auto-rows-fr grid-cols-1 gap-6 sm:grid-cols-2 lg:mt-12 lg:grid-cols-3"
           role="list"
         >
           {featured.map((image) => {
             const dimensions = GALLERY_ASPECT_DIMENSIONS[image.aspect];
 
             return (
-              <li key={image.id} className="group list-none">
+              <li key={image.id} className="group flex h-full list-none">
                 <Link
                   href="/gallery"
-                  className="gallery-card block overflow-hidden rounded-2xl bg-white shadow-gallery transition-all duration-500 ease-out hover:-translate-y-1.5 hover:shadow-gallery-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                  className="gallery-card flex h-full flex-col overflow-hidden rounded-2xl bg-white shadow-gallery transition-all duration-500 ease-out hover:-translate-y-1.5 hover:shadow-gallery-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
                 >
-                  <figure>
-                    <div className={`relative overflow-hidden ${dimensions.className}`}>
+                  <figure className="flex h-full flex-col">
+                    <div className="relative min-h-0 flex-1 overflow-hidden">
                       <OptimizedImage
                         src={image.src}
                         alt={image.alt}
@@ -47,6 +47,7 @@ export default function SeeOurWork() {
                         height={dimensions.height}
                         sizes={IMAGE_SIZES.galleryFeatured}
                         quality={IMAGE_QUALITY.gallery}
+                        priority={false}
                         loading="lazy"
                         fetchPriority="low"
                         className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
@@ -63,11 +64,11 @@ export default function SeeOurWork() {
                           View
                         </span>
                       </span>
-                      <span className="absolute left-3 top-3 rounded-full bg-white/90 px-3 py-1 text-[10px] uppercase tracking-widest text-text-primary shadow-sm backdrop-blur-sm transition-all duration-300 group-hover:bg-accent group-hover:text-white md:left-4 md:top-4">
+                      <span className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 text-[10px] uppercase tracking-widest text-text-primary shadow-sm backdrop-blur-sm transition-all duration-300 group-hover:bg-accent group-hover:text-white">
                         {image.categoryLabel}
                       </span>
                     </div>
-                    <figcaption className="border-t border-border-light/80 px-4 py-4 md:px-5 md:py-4">
+                    <figcaption className="border-t border-border-light/80 p-4">
                       <p className="font-heading text-[18px] leading-snug text-text-primary md:text-[20px]">
                         {image.title}
                       </p>

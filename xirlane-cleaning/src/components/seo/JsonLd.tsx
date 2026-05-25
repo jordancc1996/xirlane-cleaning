@@ -1,3 +1,5 @@
+import { dedupeSchemaNodes } from "@/lib/schema";
+
 type JsonLdProps = {
   data: Record<string, unknown> | Record<string, unknown>[];
 };
@@ -29,9 +31,9 @@ type JsonLdGraphProps = {
   nodes: Record<string, unknown>[];
 };
 
-/** Single connected @graph — preferred for entity linking by Google and AI parsers. */
+/** Single connected @graph — preferred for entity linking; dedupes nodes by @id. */
 export function JsonLdGraph({ nodes }: JsonLdGraphProps) {
-  const graph = nodes.map((node) => stripContext(node));
+  const graph = dedupeSchemaNodes(nodes).map((node) => stripContext(node));
 
   return (
     <script

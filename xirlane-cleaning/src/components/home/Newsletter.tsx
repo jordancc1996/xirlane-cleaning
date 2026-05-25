@@ -13,6 +13,9 @@ export default function Newsletter() {
           <form className="mt-8 flex flex-col items-stretch gap-4 md:flex-row">
             <input
               type="email"
+              name="email"
+              autoComplete="email"
+              aria-label="Email address for newsletter"
               placeholder="Your email address"
               className="w-full border-b border-white/30 bg-transparent py-3 text-[14px] text-white placeholder:text-white/50 focus:border-accent focus:outline-none"
             />

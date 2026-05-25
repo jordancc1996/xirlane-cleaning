@@ -1,20 +1,34 @@
+import type { BlogPost } from "./blog-types";
+import type { BlogCategorySlug } from "./blog-categories";
+import { BLOG_CATEGORIES } from "./blog-categories";
+import { blogPostAbsoluteUrl, blogPostUrl } from "./blog";
+import { BLOG_AUTHOR } from "./blog-author";
+import type { FaqItemData } from "./faqs";
 import { LOCAL_SERVICES } from "./local-services";
+import type { LocationLandingConfig } from "./location-landing-pages";
+import { getLandingByPath, SEO_LANDING_PAGES } from "./seo-landing-pages";
+import { canonicalUrl } from "./seo";
 import { BUSINESS, SERVICE_ROUTES, SITE_URL, getBusinessSameAs } from "./site";
 
-type FaqItem = { question: string; answer: string };
+export const SCHEMA_IDS = {
+  website: `${SITE_URL}/#website`,
+  organization: `${SITE_URL}/#organization`,
+  localBusiness: `${SITE_URL}/#localbusiness`,
+} as const;
 
 function areaServedEntities() {
   return [
     {
       "@type": "City",
       name: "Philadelphia",
-      containedInPlace: { "@type": "State", name: "Pennsylvania" },
+      containedInPlace: { "@type": "State", name: "Pennsylvania", "@id": "https://www.wikidata.org/wiki/Q1345" },
     },
     ...BUSINESS.serviceAreas
       .filter((a) => !a.startsWith("Philadelphia"))
       .map((area) => ({
         "@type": "AdministrativeArea",
         name: area,
+        containedInPlace: { "@type": "State", name: "Pennsylvania" },
       })),
   ];
 }
@@ -28,55 +42,68 @@ function openingHoursSpecification() {
   }));
 }
 
+function postalAddress() {
+  return {
+    "@type": "PostalAddress",
+    streetAddress: "Greater Philadelphia",
+    addressLocality: BUSINESS.locality,
+    addressRegion: BUSINESS.region,
+    postalCode: BUSINESS.postalCode,
+    addressCountry: BUSINESS.country,
+  };
+}
+
 export function webSiteSchema() {
   return {
-    "@context": "https://schema.org",
     "@type": "WebSite",
-    "@id": `${SITE_URL}/#website`,
+    "@id": SCHEMA_IDS.website,
     url: SITE_URL,
     name: BUSINESS.name,
     description:
       "Cleaning services, maid service, deep cleaning, commercial cleaning, and move-out cleaning in Philadelphia, PA.",
     inLanguage: "en-US",
-    publisher: { "@id": `${SITE_URL}/#organization` },
+    publisher: { "@id": SCHEMA_IDS.organization },
   };
 }
 
 export function organizationSchema() {
   return {
-    "@context": "https://schema.org",
     "@type": "Organization",
-    "@id": `${SITE_URL}/#organization`,
+    "@id": SCHEMA_IDS.organization,
     name: BUSINESS.name,
     legalName: BUSINESS.legalName,
     url: SITE_URL,
     email: BUSINESS.email,
     telephone: BUSINESS.phone,
-    logo: `${SITE_URL}/favicon.ico`,
+    logo: {
+      "@type": "ImageObject",
+      url: `${SITE_URL}/favicon.ico`,
+      contentUrl: `${SITE_URL}/favicon.ico`,
+    },
     areaServed: areaServedEntities(),
     sameAs: getBusinessSameAs(),
   };
 }
 
+/** Single canonical LocalBusiness entity — emitted once site-wide via layout @graph. */
 export function localBusinessSchema() {
-  const offers = Object.values(LOCAL_SERVICES).map((service, index) => ({
+  const serviceEntries = SEO_LANDING_PAGES.map((page, index) => ({
     "@type": "Offer",
     position: index + 1,
     itemOffered: {
       "@type": "Service",
-      "@id": `${SITE_URL}${service.path}#service`,
-      name: service.localName,
-      description: service.description,
-      url: `${SITE_URL}${service.path}`,
+      "@id": `${SITE_URL}${page.path}#service`,
+      name: page.localName,
+      description: page.meta.description,
+      url: `${SITE_URL}${page.path}`,
       areaServed: areaServedEntities(),
-      provider: { "@id": `${SITE_URL}/#localbusiness` },
+      provider: { "@id": SCHEMA_IDS.localBusiness },
     },
   }));
 
   return {
-    "@context": "https://schema.org",
-    "@type": ["LocalBusiness", "CleaningService"],
-    "@id": `${SITE_URL}/#localbusiness`,
+    "@type": ["LocalBusiness", "HomeAndConstructionBusiness"],
+    "@id": SCHEMA_IDS.localBusiness,
     name: BUSINESS.name,
     url: SITE_URL,
     email: BUSINESS.email,
@@ -84,14 +111,8 @@ export function localBusinessSchema() {
     priceRange: BUSINESS.priceRange,
     image: `${SITE_URL}/favicon.ico`,
     description:
-      "Xirlane Cleaning provides cleaning services in Philadelphia including maid service, deep cleaning, commercial cleaning, and move-out cleaning across five PA counties.",
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: BUSINESS.locality,
-      addressRegion: BUSINESS.region,
-      postalCode: BUSINESS.postalCode,
-      addressCountry: BUSINESS.country,
-    },
+      "Xirlane Cleaning provides house cleaning, maid service, deep cleaning, commercial cleaning, office cleaning, and move-out cleaning in Philadelphia, Montgomery, Delaware, Chester, and Bucks County, PA.",
+    address: postalAddress(),
     geo: {
       "@type": "GeoCoordinates",
       latitude: BUSINESS.geo.latitude,
@@ -111,82 +132,87 @@ export function localBusinessSchema() {
     currenciesAccepted: "USD",
     paymentAccepted: "Cash, Credit Card",
     knowsAbout: [
-      "House cleaning",
+      "House cleaning Philadelphia",
       "Maid service",
       "Deep cleaning",
       "Commercial cleaning",
+      "Office cleaning",
       "Move-out cleaning",
       "Post-construction cleaning",
+      "Airbnb turnover cleaning",
     ],
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: "Philadelphia Cleaning Services",
-      itemListElement: offers,
+      itemListElement: serviceEntries,
     },
-    parentOrganization: { "@id": `${SITE_URL}/#organization` },
+    parentOrganization: { "@id": SCHEMA_IDS.organization },
     sameAs: getBusinessSameAs(),
   };
 }
 
 export function serviceSchema(path: string) {
   const service = Object.values(LOCAL_SERVICES).find((s) => s.path === path);
+  const landing = getLandingByPath(path);
 
-  if (service) {
-    return {
-      "@context": "https://schema.org",
-      "@type": "Service",
-      "@id": `${SITE_URL}${path}#service`,
-      name: service.localName,
-      alternateName: service.schemaName,
-      description: service.description,
-      url: `${SITE_URL}${path}`,
-      serviceType: service.schemaName,
-      category: "Cleaning Service",
-      provider: { "@id": `${SITE_URL}/#localbusiness` },
-      areaServed: areaServedEntities(),
-      availableChannel: {
-        "@type": "ServiceChannel",
-        serviceUrl: `${SITE_URL}/contact`,
-        servicePhone: BUSINESS.phone,
-      },
-    };
-  }
+  const name = service?.localName ?? landing?.localName ?? "Cleaning Service";
+  const description =
+    service?.description ??
+    landing?.meta.description ??
+    `Professional cleaning in Greater Philadelphia.`;
+  const serviceType = service?.schemaName ?? landing?.schemaName ?? "Cleaning Service";
 
-  const route = SERVICE_ROUTES.find((r) => r.path === path);
   return {
-    "@context": "https://schema.org",
     "@type": "Service",
     "@id": `${SITE_URL}${path}#service`,
-    name: route?.name ?? "Cleaning Service",
-    description: `Professional ${route?.name ?? "cleaning"} in Greater Philadelphia.`,
+    name,
+    alternateName: service?.schemaName ?? landing?.schemaName,
+    description,
     url: `${SITE_URL}${path}`,
-    provider: { "@id": `${SITE_URL}/#localbusiness` },
+    serviceType,
+    category: "Cleaning Service",
+    provider: { "@id": SCHEMA_IDS.localBusiness },
     areaServed: areaServedEntities(),
+    availableChannel: {
+      "@type": "ServiceChannel",
+      serviceUrl: `${SITE_URL}/contact`,
+      servicePhone: BUSINESS.phone,
+      areaServed: areaServedEntities(),
+    },
   };
 }
 
-export function breadcrumbSchema(items: { name: string; path: string }[]) {
+export function breadcrumbSchema(
+  items: { name: string; path: string }[],
+  options?: { pagePath?: string },
+) {
+  const pagePath = options?.pagePath ?? items[items.length - 1]?.path ?? "/";
   return {
-    "@context": "https://schema.org",
     "@type": "BreadcrumbList",
+    "@id": `${canonicalUrl(pagePath)}#breadcrumb`,
     itemListElement: items.map((item, index) => ({
       "@type": "ListItem",
       position: index + 1,
       name: item.name,
-      item: `${SITE_URL}${item.path}`,
+      item: canonicalUrl(item.path),
     })),
   };
 }
 
-export function faqPageSchema(faqs: FaqItem[]) {
+export function faqPageSchema(
+  faqs: FaqItemData[],
+  options?: { path?: string; pageName?: string },
+) {
+  const path = options?.path ?? "/faq";
+  const pageName = options?.pageName ?? "Frequently Asked Questions — Xirlane Cleaning";
+
   return {
-    "@context": "https://schema.org",
     "@type": "FAQPage",
-    "@id": `${SITE_URL}/faq#webpage`,
-    url: `${SITE_URL}/faq`,
-    name: "Frequently Asked Questions — Xirlane Cleaning",
-    isPartOf: { "@id": `${SITE_URL}/#website` },
-    about: { "@id": `${SITE_URL}/#localbusiness` },
+    "@id": `${canonicalUrl(path)}#faq`,
+    url: canonicalUrl(path),
+    name: pageName,
+    isPartOf: { "@id": SCHEMA_IDS.website },
+    about: { "@id": SCHEMA_IDS.localBusiness },
     inLanguage: "en-US",
     mainEntity: faqs.map((faq) => ({
       "@type": "Question",
@@ -201,16 +227,15 @@ export function faqPageSchema(faqs: FaqItem[]) {
 
 export function contactPageSchema() {
   return {
-    "@context": "https://schema.org",
     "@type": "ContactPage",
-    "@id": `${SITE_URL}/contact#webpage`,
-    url: `${SITE_URL}/contact`,
+    "@id": `${canonicalUrl("/contact")}#webpage`,
+    url: canonicalUrl("/contact"),
     name: `Contact ${BUSINESS.name}`,
-    isPartOf: { "@id": `${SITE_URL}/#website` },
+    isPartOf: { "@id": SCHEMA_IDS.website },
     inLanguage: "en-US",
     description:
       "Request a free cleaning quote for homes and businesses in Philadelphia and surrounding PA counties.",
-    mainEntity: { "@id": `${SITE_URL}/#localbusiness` },
+    mainEntity: { "@id": SCHEMA_IDS.localBusiness },
   };
 }
 
@@ -223,7 +248,140 @@ export function serviceAreasPageSchema() {
   });
 }
 
-/** Global entities linked by @id across all pages. */
+export function servicesItemListSchema() {
+  return {
+    "@type": "ItemList",
+    "@id": `${canonicalUrl("/services")}#itemlist`,
+    name: "Philadelphia Cleaning Services",
+    numberOfItems: SERVICE_ROUTES.length,
+    itemListElement: SERVICE_ROUTES.map((route, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: route.name,
+      item: `${SITE_URL}${route.path}`,
+    })),
+  };
+}
+
+export function locationsItemListSchema(
+  locations: { path: string; name: string }[],
+) {
+  return {
+    "@type": "ItemList",
+    "@id": `${canonicalUrl("/locations")}#itemlist`,
+    name: "Philadelphia neighborhood cleaning pages",
+    numberOfItems: locations.length,
+    itemListElement: locations.map((loc, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: loc.name,
+      item: `${SITE_URL}${loc.path}`,
+    })),
+  };
+}
+
+export function placeSchema(location: LocationLandingConfig) {
+  return {
+    "@type": "Place",
+    "@id": `${SITE_URL}${location.path}#place`,
+    name: `${location.neighborhoodName}, Philadelphia`,
+    description: location.knowledgeSummary,
+    url: `${SITE_URL}${location.path}`,
+    address: {
+      "@type": "PostalAddress",
+      addressLocality:
+        location.slug === "main-line" ? "Main Line" : BUSINESS.locality,
+      addressRegion: BUSINESS.region,
+      addressCountry: BUSINESS.country,
+    },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: BUSINESS.geo.latitude,
+      longitude: BUSINESS.geo.longitude,
+    },
+    containedInPlace: {
+      "@type": "City",
+      name: "Philadelphia",
+      containedInPlace: { "@type": "State", name: "Pennsylvania" },
+    },
+  };
+}
+
+export function blogPostingSchema(post: BlogPost) {
+  const url = blogPostAbsoluteUrl(post.slug);
+  const published = post.publishedAt;
+  const modified = post.updatedAt ?? post.publishedAt;
+
+  return {
+    "@type": "BlogPosting",
+    "@id": `${url}#article`,
+    headline: post.title,
+    description: post.description,
+    image: {
+      "@type": "ImageObject",
+      url: post.featuredImage,
+      contentUrl: post.featuredImage,
+    },
+    datePublished: published,
+    dateModified: modified,
+    inLanguage: "en-US",
+    url,
+    mainEntityOfPage: { "@id": `${canonicalUrl(blogPostUrl(post.slug))}#webpage` },
+    isPartOf: { "@id": SCHEMA_IDS.website },
+    author: {
+      "@type": "Organization",
+      "@id": SCHEMA_IDS.organization,
+      name: BLOG_AUTHOR.name,
+      url: BLOG_AUTHOR.url,
+    },
+    publisher: {
+      "@id": SCHEMA_IDS.organization,
+    },
+    about: { "@id": SCHEMA_IDS.localBusiness },
+    keywords: post.keywords.join(", "),
+    articleSection: BLOG_CATEGORIES[post.categorySlug].name,
+    contentLocation: {
+      "@type": "City",
+      name: BUSINESS.locality,
+      containedInPlace: { "@type": "State", name: BUSINESS.region },
+    },
+  };
+}
+
+export function locationServicesSchema(location: LocationLandingConfig) {
+  return {
+    "@type": "ItemList",
+    "@id": `${SITE_URL}${location.path}#services`,
+    name: `Cleaning services in ${location.neighborhoodName}, Philadelphia`,
+    numberOfItems: location.services.length,
+    itemListElement: location.services.map((service, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      item: { "@id": `${SITE_URL}${service.href}#service` },
+    })),
+  };
+}
+
+export function blogCategoryItemListSchema(
+  categorySlug: BlogCategorySlug,
+  posts: BlogPost[],
+) {
+  const path = `/blog/category/${categorySlug}`;
+  return {
+    "@type": "ItemList",
+    "@id": `${canonicalUrl(path)}#itemlist`,
+    name: `${BLOG_CATEGORIES[categorySlug].name} articles`,
+    numberOfItems: posts.length,
+    itemListElement: posts.map((post, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: post.title,
+      item: blogPostAbsoluteUrl(post.slug),
+    })),
+  };
+}
+
+/** Global entities linked by @id — rendered once in root layout only. */
 export function globalSchemaGraph() {
   return [webSiteSchema(), organizationSchema(), localBusinessSchema()];
 }
@@ -237,18 +395,17 @@ export function webPageSchema({
   path: string;
   name: string;
   description: string;
-  pageType?: "WebPage" | "FAQPage" | "ContactPage" | "CollectionPage";
+  pageType?: "WebPage" | "ContactPage" | "CollectionPage";
 }) {
   return {
-    "@context": "https://schema.org",
     "@type": pageType,
-    "@id": `${SITE_URL}${path}#webpage`,
-    url: `${SITE_URL}${path}`,
+    "@id": `${canonicalUrl(path)}#webpage`,
+    url: canonicalUrl(path),
     name,
     description,
-    isPartOf: { "@id": `${SITE_URL}/#website` },
-    about: { "@id": `${SITE_URL}/#localbusiness` },
-    publisher: { "@id": `${SITE_URL}/#organization` },
+    isPartOf: { "@id": SCHEMA_IDS.website },
+    about: { "@id": SCHEMA_IDS.localBusiness },
+    publisher: { "@id": SCHEMA_IDS.organization },
     inLanguage: "en-US",
   };
 }
@@ -260,19 +417,17 @@ type GallerySchemaImage = {
   caption?: string;
 };
 
-/** ImageGallery schema for /gallery — helps Google understand photo content. */
 export function galleryImageGallerySchema(images: GallerySchemaImage[]) {
   return {
-    "@context": "https://schema.org",
     "@type": "ImageGallery",
-    "@id": `${SITE_URL}/gallery#imagegallery`,
-    url: `${SITE_URL}/gallery`,
+    "@id": `${canonicalUrl("/gallery")}#imagegallery`,
+    url: canonicalUrl("/gallery"),
     name: "Xirlane Cleaning Project Gallery",
     description:
       "Completed cleaning results from Xirlane Cleaning: professional house cleaning, deep cleaning service, move-out cleaning, and commercial cleaning in Philadelphia, PA.",
     inLanguage: "en-US",
-    provider: { "@id": `${SITE_URL}/#localbusiness` },
-    isPartOf: { "@id": `${SITE_URL}/gallery#webpage` },
+    provider: { "@id": SCHEMA_IDS.localBusiness },
+    isPartOf: { "@id": `${canonicalUrl("/gallery")}#webpage` },
     image: images.map((image) => ({
       "@type": "ImageObject",
       contentUrl: `${SITE_URL}${image.src}`,
@@ -282,4 +437,21 @@ export function galleryImageGallerySchema(images: GallerySchemaImage[]) {
       caption: image.caption ?? image.title,
     })),
   };
+}
+
+/** Deduplicate nodes by @id so page graphs never repeat global entities. */
+export function dedupeSchemaNodes(nodes: Record<string, unknown>[]) {
+  const seen = new Set<string>();
+  const result: Record<string, unknown>[] = [];
+
+  for (const node of nodes) {
+    const id = node["@id"];
+    if (typeof id === "string") {
+      if (seen.has(id)) continue;
+      seen.add(id);
+    }
+    result.push(node);
+  }
+
+  return result;
 }

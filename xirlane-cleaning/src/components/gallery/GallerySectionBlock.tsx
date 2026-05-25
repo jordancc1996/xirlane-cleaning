@@ -17,12 +17,12 @@ export default function GallerySectionBlock({ section, startIndex }: GallerySect
     >
       <div className="max-w-3xl">
         <p className="text-[11px] uppercase tracking-eyebrow text-accent">Gallery</p>
-        <h2
+        <h3
           id={`gallery-section-${section.id}`}
           className="mt-3 text-h2-mobile text-text-primary md:text-h2"
         >
           {section.heading}
-        </h2>
+        </h3>
         <p className="mt-4 text-text-body">{section.description}</p>
       </div>
 

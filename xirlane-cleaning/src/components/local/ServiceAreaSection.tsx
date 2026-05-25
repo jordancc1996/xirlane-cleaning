@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { LOCATION_NAV_LINKS } from "@/lib/location-landing-pages";
 import { LOCAL_SERVICES, type LocalServiceKey } from "@/lib/local-services";
 import { BUSINESS } from "@/lib/site";
 
@@ -59,21 +60,34 @@ export default function ServiceAreaSection({
         <h3 className="mt-8 text-h3-mobile text-text-primary md:text-h3">
           Popular Philadelphia neighborhoods
         </h3>
+        <ul className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-[14px]">
+          {LOCATION_NAV_LINKS.map((loc) => (
+            <li key={loc.href}>
+              <Link href={loc.href} className="text-text-primary hover:text-accent">
+                {loc.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
         <p className="mt-3 text-[14px] text-text-body">
-          {BUSINESS.philadelphiaNeighborhoods.join(", ")}, and surrounding communities.
+          <Link href="/locations" className="text-accent hover:underline">
+            View all neighborhood pages
+          </Link>
         </p>
 
         <h3 className="mt-8 text-h3-mobile text-text-primary md:text-h3">
           Philadelphia cleaning services
         </h3>
         <ul className="mt-4 space-y-2 text-[14px]">
-          {Object.entries(LOCAL_SERVICES).map(([key, service]) => (
-            <li key={key}>
-              <Link href={service.path} className="text-text-primary hover:text-accent">
-                {service.localName}
-              </Link>
-            </li>
-          ))}
+          {Object.entries(LOCAL_SERVICES)
+            .filter(([key]) => key !== "cleaningServices")
+            .map(([key, service]) => (
+              <li key={key}>
+                <Link href={service.path} className="text-text-primary hover:text-accent">
+                  {service.localName}
+                </Link>
+              </li>
+            ))}
         </ul>
 
         <p className="mt-8 text-[14px] text-text-body">

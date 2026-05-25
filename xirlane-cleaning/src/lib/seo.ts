@@ -8,6 +8,9 @@ export type PageSeoInput = {
   path: string;
   keywords?: string[];
   noIndex?: boolean;
+  /** Use when title already includes branding (e.g. blog categories). */
+  titleAbsolute?: boolean;
+  ogType?: "website" | "article";
   ogImage?: string;
   ogImageAlt?: string;
 };
@@ -18,19 +21,31 @@ function resolveOgImageUrl(image?: string): string {
   return `${SITE_URL}${image.startsWith("/") ? image : `/${image}`}`;
 }
 
+/** Absolute canonical URL for a route (homepage omits trailing slash). */
+export function canonicalUrl(path: string = "/"): string {
+  if (!path || path === "/") {
+    return SITE_URL;
+  }
+  const normalized = path.startsWith("/") ? path : `/${path}`;
+  return `${SITE_URL}${normalized}`;
+}
+
 export function createPageMetadata({
   title,
   description,
   path,
   keywords = [],
   noIndex = false,
+  titleAbsolute = false,
+  ogType = "website",
   ogImage,
   ogImageAlt,
 }: PageSeoInput): Metadata {
-  const url = `${SITE_URL}${path}`;
+  const url = canonicalUrl(path);
   const isHome = path === "/";
-  const resolvedTitle = isHome ? { absolute: title } : title;
-  const fullTitle = isHome ? title : `${title} | ${BUSINESS.name}`;
+  const useAbsoluteTitle = isHome || titleAbsolute;
+  const resolvedTitle = useAbsoluteTitle ? { absolute: title } : title;
+  const fullTitle = useAbsoluteTitle ? title : `${title} | ${BUSINESS.name}`;
   const imageUrl = resolveOgImageUrl(ogImage);
   const imageAlt =
     ogImageAlt ?? `${BUSINESS.name} — professional cleaning in Greater Philadelphia`;
@@ -56,7 +71,7 @@ export function createPageMetadata({
           },
         },
     openGraph: {
-      type: "website",
+      type: ogType,
       locale: "en_US",
       url,
       siteName: BUSINESS.name,
@@ -106,9 +121,6 @@ export const rootMetadata: Metadata = {
     email: false,
     address: false,
     telephone: false,
-  },
-  alternates: {
-    canonical: SITE_URL,
   },
   robots: {
     index: true,

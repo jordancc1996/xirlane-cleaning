@@ -33,6 +33,7 @@ export default function GalleryCard({ image, index }: GalleryCardProps) {
                 height={dimensions.height}
                 sizes={IMAGE_SIZES.gallery}
                 quality={IMAGE_QUALITY.gallery}
+                priority={false}
                 loading="lazy"
                 fetchPriority="low"
                 className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"

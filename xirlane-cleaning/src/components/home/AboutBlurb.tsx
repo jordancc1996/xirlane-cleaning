@@ -19,8 +19,11 @@ export default function AboutBlurb() {
           <p className="mt-6 text-[15px] leading-relaxed text-text-body">
             At Xirlane Cleaning, we deliver high-quality residential cleaning in Philadelphia
             with the same care for every room, every visit. Homeowners across Montgomery,
-            Delaware, Chester, and Bucks County book us for weekly, biweekly, and monthly
-            plans — or a single visit when life gets busy.
+            Delaware, Chester, and Bucks County book us for{" "}
+            <Link href="/services/house-cleaning" className="text-accent hover:underline">
+              weekly, biweekly, and monthly plans
+            </Link>{" "}
+            — or a single visit when life gets busy.
           </p>
           <p className="mt-4 text-[15px] leading-relaxed text-text-body">
             We also support offices and worksites with{" "}
@@ -32,7 +35,7 @@ export default function AboutBlurb() {
               deep cleaning services
             </Link>{" "}
             and{" "}
-            <Link href="/services/post-construction" className="text-accent hover:underline">
+            <Link href="/services/post-construction-cleaning" className="text-accent hover:underline">
               move-out cleaning
             </Link>{" "}
             when you need a full reset. Our friendly crew is here to make your space shine.
