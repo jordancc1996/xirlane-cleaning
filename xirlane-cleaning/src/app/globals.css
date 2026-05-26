@@ -259,7 +259,7 @@ body {
 
 .exit-intent-overlay {
   opacity: 0;
-  transition: opacity 350ms ease-out;
+  transition: opacity 400ms ease-out;
 }
 
 .exit-intent-overlay.is-visible {
@@ -268,7 +268,7 @@ body {
 
 .exit-intent-modal {
   opacity: 0;
-  transition: opacity 350ms ease-out;
+  transition: opacity 400ms ease-out;
 }
 
 .exit-intent-modal.is-visible {

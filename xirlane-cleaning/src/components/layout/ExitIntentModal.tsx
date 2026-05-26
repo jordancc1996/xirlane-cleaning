@@ -8,8 +8,11 @@ import { useSitePopupEligibility } from "@/hooks/useSitePopupEligibility";
 import { getPrefersReducedMotion } from "@/lib/motion";
 import { forceClaimSitePopup, releaseSitePopup } from "@/lib/site-popups";
 
-const FADE_MS = 350;
-const TOP_EXIT_THRESHOLD_PX = 20;
+const FADE_MS = 400;
+/** Below the 40% corner popup — early, light nudge only. */
+const SCROLL_THRESHOLD = 0.25;
+/** Brief pause past threshold so a quick flick does not open the modal. */
+const SCROLL_DWELL_MS = 900;
 
 function sessionKeyForPath(pathname: string): string {
   return `xirlane-exit-intent-shown:${pathname}`;
@@ -79,37 +82,39 @@ export default function ExitIntentModal() {
   useEffect(() => {
     if (!eligible || hasShownOnPage(pathname)) return;
 
-    const canUseExitIntent = window.matchMedia("(pointer: fine)").matches;
-    if (!canUseExitIntent) return;
+    let dwellTimer: ReturnType<typeof setTimeout> | null = null;
 
-    const tryTrigger = () => {
+    const clearDwell = () => {
+      if (dwellTimer) {
+        clearTimeout(dwellTimer);
+        dwellTimer = null;
+      }
+    };
+
+    const evaluateScroll = () => {
       if (triggeredRef.current || hasShownOnPage(pathname)) return;
-      trigger();
-    };
 
-    const onMouseOut = (event: MouseEvent) => {
-      const related = event.relatedTarget;
-      const leftDocument =
-        related === null ||
-        (related instanceof Node && !document.documentElement.contains(related));
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = scrollable > 0 ? window.scrollY / scrollable : 0;
 
-      if (leftDocument && event.clientY <= TOP_EXIT_THRESHOLD_PX) {
-        tryTrigger();
+      if (progress >= SCROLL_THRESHOLD) {
+        if (!dwellTimer) {
+          dwellTimer = setTimeout(() => {
+            dwellTimer = null;
+            trigger();
+          }, SCROLL_DWELL_MS);
+        }
+      } else {
+        clearDwell();
       }
     };
 
-    const onMouseLeave = (event: MouseEvent) => {
-      if (event.clientY <= TOP_EXIT_THRESHOLD_PX) {
-        tryTrigger();
-      }
-    };
-
-    document.addEventListener("mouseout", onMouseOut);
-    document.documentElement.addEventListener("mouseleave", onMouseLeave);
+    evaluateScroll();
+    window.addEventListener("scroll", evaluateScroll, { passive: true });
 
     return () => {
-      document.removeEventListener("mouseout", onMouseOut);
-      document.documentElement.removeEventListener("mouseleave", onMouseLeave);
+      clearDwell();
+      window.removeEventListener("scroll", evaluateScroll);
     };
   }, [eligible, pathname, trigger]);
 
@@ -140,14 +145,14 @@ export default function ExitIntentModal() {
 
   return createPortal(
     <div
-      className={`exit-intent-overlay fixed inset-0 z-[60] flex items-center justify-center px-4 ${
+      className={`exit-intent-overlay fixed inset-0 z-[60] flex items-center justify-center px-4 py-8 ${
         visible ? "is-visible" : ""
       }`}
       role="presentation"
     >
       <button
         type="button"
-        className="absolute inset-0 z-0 bg-black/40"
+        className="absolute inset-0 z-0 bg-black/25"
         aria-label="Close dialog"
         onClick={dismiss}
       />
@@ -156,17 +161,17 @@ export default function ExitIntentModal() {
         role="dialog"
         aria-modal="true"
         aria-labelledby="exit-intent-heading"
-        className={`exit-intent-modal relative z-10 w-full max-w-md border border-border-light bg-white p-8 text-center shadow-[0_20px_60px_rgba(26,26,26,0.18)] md:p-10 ${
+        className={`exit-intent-modal relative z-10 w-full max-w-sm border border-border-light bg-white p-7 text-center shadow-[0_16px_48px_rgba(26,26,26,0.1)] md:p-8 ${
           visible ? "is-visible" : ""
         }`}
       >
         <h2
           id="exit-intent-heading"
-          className="font-heading text-[28px] font-light leading-tight text-text-primary md:text-[32px]"
+          className="font-heading text-[24px] font-light leading-tight text-text-primary md:text-[28px]"
         >
           Before You Go —
         </h2>
-        <p className="mt-3 font-body text-[15px] leading-relaxed text-text-body">
+        <p className="mt-2.5 font-body text-[14px] leading-relaxed text-text-body">
           Get a free cleaning quote in under 2 minutes.
         </p>
 
@@ -174,7 +179,7 @@ export default function ExitIntentModal() {
           ref={ctaRef}
           href="/contact"
           onClick={dismiss}
-          className="mt-8 inline-flex min-h-12 w-full items-center justify-center bg-button-primary-bg px-8 font-body text-[12px] uppercase tracking-widest text-button-primary-text transition-colors hover:bg-accent md:w-auto"
+          className="mt-6 inline-flex min-h-11 w-full items-center justify-center bg-button-primary-bg px-6 font-body text-[11px] uppercase tracking-widest text-button-primary-text transition-colors hover:bg-accent"
         >
           Request a Free Quote &rarr;
         </Link>
@@ -182,7 +187,7 @@ export default function ExitIntentModal() {
         <button
           type="button"
           onClick={dismiss}
-          className="mt-5 font-body text-[13px] text-text-body underline decoration-border-light underline-offset-4 transition-colors hover:text-text-primary hover:decoration-text-body"
+          className="mt-4 font-body text-[12px] text-text-body/80 underline decoration-border-light underline-offset-4 transition-colors hover:text-text-primary hover:decoration-text-body"
         >
           No thanks, I&apos;ll pass
         </button>
