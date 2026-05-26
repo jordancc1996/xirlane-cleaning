@@ -160,4 +160,11 @@ export const rootMetadata: Metadata = {
       },
     ],
   },
+  icons: {
+    icon: [
+      { url: "/favicon.png", type: "image/png", sizes: "32x32" },
+      { url: "/favicon.ico", type: "image/x-icon" },
+    ],
+    apple: [{ url: "/favicon-180x180.png", sizes: "180x180", type: "image/png" }],
+  },
 };

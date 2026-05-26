@@ -77,8 +77,8 @@ export function organizationSchema() {
     telephone: BUSINESS.phone,
     logo: {
       "@type": "ImageObject",
-      url: `${SITE_URL}/favicon.ico`,
-      contentUrl: `${SITE_URL}/favicon.ico`,
+      url: `${SITE_URL}/favicon-180x180.png`,
+      contentUrl: `${SITE_URL}/favicon-180x180.png`,
     },
     areaServed: areaServedEntities(),
     sameAs: getBusinessSameAs(),
@@ -109,7 +109,7 @@ export function localBusinessSchema() {
     email: BUSINESS.email,
     telephone: BUSINESS.phone,
     priceRange: BUSINESS.priceRange,
-    image: `${SITE_URL}/favicon.ico`,
+    image: `${SITE_URL}/favicon-180x180.png`,
     description:
       "Xirlane Cleaning provides house cleaning, maid service, deep cleaning, commercial cleaning, office cleaning, and move-out cleaning in Philadelphia, Montgomery, Delaware, Chester, and Bucks County, PA.",
     address: postalAddress(),
