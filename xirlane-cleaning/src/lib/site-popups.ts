@@ -46,6 +46,12 @@ export function claimSitePopup(type: SitePopupType): boolean {
   return true;
 }
 
+/** Take over from another popup (e.g. exit intent over scroll corner card). */
+export function forceClaimSitePopup(type: SitePopupType): void {
+  activePopup = type;
+  notifySitePopupState();
+}
+
 export function releaseSitePopup(type: SitePopupType): void {
   if (activePopup !== type) return;
   activePopup = null;

@@ -1,34 +1,39 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { useSitePopupEligibility } from "@/hooks/useSitePopupEligibility";
 import { getPrefersReducedMotion } from "@/lib/motion";
-import { claimSitePopup, releaseSitePopup } from "@/lib/site-popups";
+import { forceClaimSitePopup, releaseSitePopup } from "@/lib/site-popups";
 
-const SESSION_KEY = "xirlane-exit-intent-shown";
 const FADE_MS = 350;
-const TOP_EXIT_THRESHOLD_PX = 12;
+const TOP_EXIT_THRESHOLD_PX = 20;
 
-function hasShownThisSession(): boolean {
+function sessionKeyForPath(pathname: string): string {
+  return `xirlane-exit-intent-shown:${pathname}`;
+}
+
+function hasShownOnPage(pathname: string): boolean {
   try {
-    return sessionStorage.getItem(SESSION_KEY) === "1";
+    return sessionStorage.getItem(sessionKeyForPath(pathname)) === "1";
   } catch {
     return false;
   }
 }
 
-function markShownThisSession(): void {
+function markShownOnPage(pathname: string): void {
   try {
-    sessionStorage.setItem(SESSION_KEY, "1");
+    sessionStorage.setItem(sessionKeyForPath(pathname), "1");
   } catch {
     /* storage unavailable */
   }
 }
 
 export default function ExitIntentModal() {
-  const { eligible, blockedByOtherPopup } = useSitePopupEligibility("exit-intent");
+  const pathname = usePathname();
+  const { eligible } = useSitePopupEligibility("exit-intent");
   const [mounted, setMounted] = useState(false);
   const [open, setOpen] = useState(false);
   const [visible, setVisible] = useState(false);
@@ -49,14 +54,11 @@ export default function ExitIntentModal() {
   }, []);
 
   const trigger = useCallback(() => {
-    if (triggeredRef.current || hasShownThisSession() || !eligible || blockedByOtherPopup) {
-      return;
-    }
-
-    if (!claimSitePopup("exit-intent")) return;
+    if (triggeredRef.current || !eligible || hasShownOnPage(pathname)) return;
 
     triggeredRef.current = true;
-    markShownThisSession();
+    markShownOnPage(pathname);
+    forceClaimSitePopup("exit-intent");
     setOpen(true);
 
     if (getPrefersReducedMotion()) {
@@ -64,28 +66,52 @@ export default function ExitIntentModal() {
     } else {
       requestAnimationFrame(() => setVisible(true));
     }
-  }, [eligible, blockedByOtherPopup]);
+  }, [eligible, pathname]);
+
+  useEffect(() => {
+    triggeredRef.current = false;
+  }, [pathname]);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
   useEffect(() => {
-    if (!eligible || blockedByOtherPopup || hasShownThisSession()) return;
+    if (!eligible || hasShownOnPage(pathname)) return;
 
     const canUseExitIntent = window.matchMedia("(pointer: fine)").matches;
     if (!canUseExitIntent) return;
 
-    const onMouseLeave = (event: MouseEvent) => {
-      if (triggeredRef.current) return;
-      if (event.clientY > TOP_EXIT_THRESHOLD_PX) return;
+    const tryTrigger = () => {
+      if (triggeredRef.current || hasShownOnPage(pathname)) return;
       trigger();
     };
 
+    const onMouseOut = (event: MouseEvent) => {
+      const related = event.relatedTarget;
+      const leftDocument =
+        related === null ||
+        (related instanceof Node && !document.documentElement.contains(related));
+
+      if (leftDocument && event.clientY <= TOP_EXIT_THRESHOLD_PX) {
+        tryTrigger();
+      }
+    };
+
+    const onMouseLeave = (event: MouseEvent) => {
+      if (event.clientY <= TOP_EXIT_THRESHOLD_PX) {
+        tryTrigger();
+      }
+    };
+
+    document.addEventListener("mouseout", onMouseOut);
     document.documentElement.addEventListener("mouseleave", onMouseLeave);
 
-    return () => document.documentElement.removeEventListener("mouseleave", onMouseLeave);
-  }, [eligible, blockedByOtherPopup, trigger]);
+    return () => {
+      document.removeEventListener("mouseout", onMouseOut);
+      document.documentElement.removeEventListener("mouseleave", onMouseLeave);
+    };
+  }, [eligible, pathname, trigger]);
 
   useEffect(() => {
     if (!eligible && open) dismiss();
